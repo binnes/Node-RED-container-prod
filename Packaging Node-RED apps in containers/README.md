@@ -80,7 +80,7 @@ For a Node-RED application all dependencies are specified in the package.json fi
 
 However, there are still '*hidden*' dependencies that can creep into a project when a package has some native dependencies that need to be installed in the host system running the application.
 
-To get round this the starter project has a Dockerfile which will build the source from the revision control system and build a container containing the application.  The Dockerfile captures all *hidden* dependencies.
+To get round this the starter project has a Dockerfile which will build the application from the source code and package it into a container.  The Dockerfile captures all *hidden* dependencies.
 
 The provided Dockerfile in the starter project initially creates a build container to build the required software, then creates an applications image, copying built content from the build container.  This way a fully defined build environment is created and used, but the build tooling is not part of the production container image.
 
@@ -116,18 +116,25 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
     * press the **Deploy** button to make the new nodes live (you can now access the new endpoint running on your local Node-RED instance [http://localhost:1880/hello](http://localhost:1880/hello)
 
 3. Commit and push the change to git
+    * switch to the git side panel
+    * stage the change to the flows.jon
+    * commit the change
+    * switch to the Commit History section of the side panel
+    * click the up arrow to open the Manage remote branch popup
+    * push the change to the server
 
 ### Step 3. Configure the builder and build the application
 
-In this tutorial you will use the new **buildx** feature of Docker.  At the time of writing this content it is an experimental feature in Docker, so experimental features need to be enabled to get access to buildx:
+In this tutorial we will use the new **buildx** feature of Docker.  At the time of writing this content it is an experimental feature in Docker, so experimental features need to be enabled in Docker to get access to buildx:
 
 1. Enable experimental features in Docker:
     * Linux
       * Environment variable **DOCKER_CLI_EXPERIMENTAL** should be set to **enabled**
     * MacOS and Windows
       * Start Docker if it is not running
-      * Click the Docker icon (usually in bottom notification popup on Windows, top menu bar on MacOS) and select **settings** or **Preferences** then the **Command Line** section.  Enable Experimental features
-2. Open a command window then :
+      * Click the Docker icon (usually in bottom notification popup on Windows, top menu bar on MacOS) and select **settings** or **Preferences** then the **Command Line** section
+      * Enable Experimental features
+2. Open a command or terminal window then :
     * navigate to your home directory
     * navigate to the **NRdata/projects/Node-RED-Docker** subdirectory within your home directory. This directory should contain the Dockerfile.  
     You will use the new **docker buildx** command to build and push a multi-arch image to dockerhub.
@@ -158,7 +165,7 @@ In this tutorial you:
 
 * Enabled experimental features in Docker to access the buildx command
 * Created a new builder instance
-* Created a multi-architecture set of containers and pushed them to DockerHub
+* Created a multi-architecture set of containers and pushed them to dockerhub
 * Inspected the created images
 * Ran the newly created container on your local machine and optionally on a system with a different CPU architecture
 

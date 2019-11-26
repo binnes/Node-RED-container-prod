@@ -69,7 +69,7 @@ You can complete this tutorial in less than 20 minutes.
 3. [MQTT node config](#step-3-mqtt-node-config)
 4. [Removing static config from nodes](#step-4-removing-static-config-from-nodes)
 5. [Testing the environment variable substitution](#step-5-testing-the-environment-variable-substitution)
-6. [Updating Docker container in DockerHub](#step-6-updating-docker-container-in-dockerhub)
+6. [Updating Docker container in dockerhub](#step-6-updating-docker-container-in-dockerhub)
 
 Having configuration embedded in a container means that container is restricted to a single environment.  If a container application needs to connect to external services, such as a database or messaging service then allowing the configuration details for the external services to be provided at runtime makes the container much more useful, as it doesn't need to be rebuilt every time configuration changes.
 
@@ -304,7 +304,7 @@ As there are quite a few environment variables that need to be set, so we will s
     e.g. on mac the command might look like:  
     `docker run -itd -p 1880:1880 --env-file env.list -v /Users/brian/NRdata:/data -v /Users/brian/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
 
-### Step 6. Updating Docker container in DockerHub
+### Step 6. Updating Docker container in dockerhub
 
 To create a containerised version of the latest version of the Node-RED application you need to rebuild and push the updated Node-RED application.
 
@@ -316,7 +316,7 @@ To create a containerised version of the latest version of the Node-RED applicat
     * `docker stop mynodered`
     * `docker rm mynodered`
     * `docker rm dockerNR`
-4. Pull the container image from DockerHub to ensure you have the latest version locally:  
+4. Pull the container image from dockerhub to ensure you have the latest version locally:  
 `docker pull [your docker hub username]/node-red-docker-sample:latest`
 5. Run the new container.  For docker you can use the **--env-file** option to pass in environment variables using the env.list file created for the previous step.  Ensuring you are still in your project directory (containing the env.list file) start your containerised Node-RED application.  You also need the container on the NRbridge network bridge to be able to access the MQTT broker container:
 

@@ -160,7 +160,7 @@ Follow the instructions below to start Node-RED with the project feature enabled
 
 You can also pull changes from the repo, so if a team is working on the same Node-RED application they can push their individual changes and the other team members can pull the changes.  
 
-It is recommended that team members use different tabs in the Node-RED editor when collaborating to avoid merge conflicts, but if a merge conflict does occur, then it han be resolved within the Node-RED editor.
+It is recommended that team members use different tabs in the Node-RED editor when collaborating to avoid merge conflicts, but if a merge conflict does occur, then it can be resolved within the Node-RED editor.
 
 Follow the instructions below to cause a merge conflict then resolve it.
 
