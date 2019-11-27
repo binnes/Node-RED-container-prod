@@ -118,15 +118,13 @@ Follow the instructions below to start Node-RED with the project feature enabled
 `mkdir NRdata`
     * *Note: on Linux the NRdata directory needs to be writeable by user with UID 1000.  If your user UID is not 1000 then make the directory writeable by everyone :  
     `chmod 777 NRdata`*
-3. To start Node-RED use command (select your operating system):
+3. To start Node-RED use command (select your operating system.  You will need to update the path to the NRdata directory):
     * **Windows**:  
         `docker run -itd -p 1880:1880 -v c:\Users\brian\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
     * **Mac OS**:  
         `docker run -itd -p 1880:1880 -v /Users/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
     * **Linux**:  
         `docker run -itd -p 1880:1880 -v /home/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
-
-    Replacing *brian* with your username.
 
     Note:
       * the **-e** option sets the **NODE_RED_ENABLE_PROJECTS** environment variable
