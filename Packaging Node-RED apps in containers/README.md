@@ -95,13 +95,13 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
 1. Start Node-RED, if not already running:
     * run `docker ps -a` to see what is running
     * if **mynodered** container instance exists, but is not in state **up**, then run command `docker start mynodered`
-    * if **mynodered** container instance does not exist then run the appropriate command (replacing *brian* with your own username):
+    * if **mynodered** container instance does not exist then run the appropriate command (replacing *YOUR-USERNAME* with your own username):
       * **Windows**:  
-          `docker run -itd -p 1880:1880 -v c:\Users\brian\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
       * **Mac OS**:  
-          `docker run -itd -p 1880:1880 -v /Users/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
       * **Linux**:  
-          `docker run -itd -p 1880:1880 -v /home/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 2. Import the following JSON to add the **/hello** endpoint:
 
     * to import the flow select the main menu (☰), then the import option from the menu
@@ -117,7 +117,7 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
 
 3. Commit and push the change to git
     * switch to the git side panel
-    * stage the change to the flows.jon
+    * stage the change to the flows.json
     * commit the change
     * switch to the Commit History section of the side panel
     * click the up arrow to open the Manage remote branch popup
@@ -148,14 +148,14 @@ In this tutorial we will use the new **buildx** feature of Docker.  At the time 
 6. Now the builder is up and running you can build a multi-arch container and push it to your dockerhub account.  First ensure you are logged into dockerhub :  
   `docker login`
 7. Build and push the image :  
-  `docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t binnes/node-red-docker-sample --push .`  
-  replace **binnes** with your docker username.  Here you see we are asking to build an image for 3 different architectures.  AMD/Intel 64 bit, ARM 64bit and ARM 32bit v7 (Raspberry Pi 3/4).  You can also add additional architectures, such as **linux/s390x** to add support for IBM Z systems or **linux/ppc64le** for IBM POWER systems
+  `docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t YOUR-DOCKER-USERNAME/node-red-docker-sample --push .`  
+  replace **YOUR-DOCKER-USERNAME** with your docker username.  Here you see we are asking to build an image for 3 different architectures.  AMD/Intel 64 bit, ARM 64bit and ARM 32bit v7 (Raspberry Pi 3/4).  You can also add additional architectures, such as **linux/s390x** to add support for IBM Z systems or **linux/ppc64le** for IBM POWER systems.  Note the more architectures you select to build, the longer the build takes.
 8. Inspect the image using command  
-  `docker buildx imagetools inspect docker.io/binnes/node-red-docker-sample:latest`
+  `docker buildx imagetools inspect docker.io/YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
 9. Stop your local Node-RED using command `docker kill mynodered` in a command line window,  then run the container using command :  
-  `docker run -dit -p 1880:1880 --name dockerNR binnes/node-red-docker-sample:latest`
+  `docker run -dit -p 1880:1880 --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
 10. Test your container.  
-    * You will not be able to launch at the Editor on the base URL, as this has been modified in the sample project settings.js file.  The editor can be launched at [**/admin**](http://localhost:1880/admin).  In a production Node-RED container you should not be able to alter the application, so the editor needs to be disabled.  This can be achieved by setting the **httpAdminRoot** property in the **settings.js** file to **false**.  Details of the Node-RED configuration options can be found in the [Node-RED documentation](https://nodered.org/docs/user-guide/runtime/configuration).  
+    * You will not be able to launch at the Editor on the base URL, as this has been modified in the sample project **settings.js** file.  The editor can be launched at [**/admin**](http://localhost:1880/admin).  In a production Node-RED container you should not be able to alter the application, so the editor needs to be disabled.  This can be achieved by setting the **httpAdminRoot** property in the **settings.js** file to **false**.  Details of the Node-RED configuration options can be found in the [Node-RED documentation](https://nodered.org/docs/user-guide/runtime/configuration).  
     * You should be able to access the [/hello](http://localhost:1880/hello) endpoint
 11. If you have a Raspberry Pi or other ARM 32-bit or ARM 64-bit system you can also test that the ARM containers also work.
 

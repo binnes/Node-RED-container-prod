@@ -120,11 +120,11 @@ Follow the instructions below to start Node-RED with the project feature enabled
     `chmod 777 NRdata`*
 3. To start Node-RED use command (select your operating system.  You will need to update the path to the NRdata directory):
     * **Windows**:  
-        `docker run -itd -p 1880:1880 -v c:\Users\brian\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+        `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
     * **Mac OS**:  
-        `docker run -itd -p 1880:1880 -v /Users/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+        `docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
     * **Linux**:  
-        `docker run -itd -p 1880:1880 -v /home/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+        `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 
     Note:
       * the **-e** option sets the **NODE_RED_ENABLE_PROJECTS** environment variable

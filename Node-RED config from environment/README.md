@@ -117,13 +117,13 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
     * `docker stop mynodered`
     * `docker rm mynodered`
-    * choose the appropriate command for your operating system (replacing *brian* with your own username):
+    * choose the appropriate command for your operating system (replacing *YOUR-USERNAME* with your own username):
       * **Windows**:  
-          `docker run -itd -p 1880:1880 -v c:\Users\brian\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red`
       * **Mac OS**:  
-          `docker run -itd -p 1880:1880 -v /Users/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red`
       * **Linux**:  
-          `docker run -itd -p 1880:1880 -v /home/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red`
 2. Modify the inject node you added in the **Node-RED with source control** tutorial to set the payload to the value of the **WWW** environment variable  
 ![inject env var](image/injectEnv.png)
 3. Modify the inject node configuration to inject a string and set the string value to **${WWW}** which produces the same result as using the env variable setting:  
@@ -169,15 +169,15 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
 In this section you will add some additional nodes to Node-RED, which connect to your local MQTT broker.
 
-1. Restart the Node-RED service on your system.  To connect to the broker the Node-RED container need access to the broker certificates, so we will map the same volume as we did when starting the broker, as the certificates are in a cert sub-directory.  We also need to add the --network option to put the Node-RED container instance on the same Docker network bridge as the MQTT broker container instance.  Run the appropriate command for your operating system (replacing *brian* with your own username):
+1. Restart the Node-RED service on your system.  To connect to the broker the Node-RED container need access to the broker certificates, so we will map the same volume as we did when starting the broker, as the certificates are in a cert sub-directory.  We also need to add the --network option to put the Node-RED container instance on the same Docker network bridge as the MQTT broker container instance.  Run the appropriate command for your operating system (replacing *YOUR-USERNAME* with your own username):
       * **Windows**:  
-          `docker run -itd -p 1880:1880 -v c:\Users\brian\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
       * **Mac OS**:  
-          `docker run -itd -p 1880:1880 -v /Users/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
       * **Linux**:  
-          `docker run -itd -p 1880:1880 -v /home/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
 
-    e.g. on mac the command might look like:  
+    e.g. on mac, logged in as user brian, the command might look like:  
     `docker run -itd -p 1880:1880 -v /Users/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v /Users/brian/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
 2. Import the following flow (using the same technique used in the previous tutorial - **menu** -> **import**):
 
@@ -293,15 +293,15 @@ As there are quite a few environment variables that need to be set, so we will s
 4. Restart Node-RED:  
     * `docker stop mynodered`
     * `docker rm mynodered`
-    * Run the appropriate command for your operating system (replacing *brian* with your own username):
+    * Run the appropriate command for your operating system (replacing *YOUR-USERNAME* with your own username):
       * **Windows**:  
-          `docker run -itd -p 1880:1880 --env-file env.list -v c:\Users\brian\NRdata:/data -v c:\<full path to where moreNodeREDWorkshop repo cloned>\moreNodeRedWorkshop\en\part5\broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 --env-file env.list -v c:\Users\YOUR-USERNAME\NRdata:/data -v c:\<full path to where moreNodeREDWorkshop repo cloned>\moreNodeRedWorkshop\en\part5\broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
       * **Mac OS**:  
-          `docker run -itd -p 1880:1880 --env-file env.list -v /Users/brian/NRdata:/data -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 --env-file env.list -v /Users/YOUR-USERNAME/NRdata:/data -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
       * **Linux**:  
-          `docker run -itd -p 1880:1880 --env-file env.list -v /home/brian/NRdata:/data -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
+          `docker run -itd -p 1880:1880 --env-file env.list -v /home/YOUR-USERNAME/NRdata:/data -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
 
-    e.g. on mac the command might look like:  
+    e.g. on mac, logged in as user brian, the command might look like:  
     `docker run -itd -p 1880:1880 --env-file env.list -v /Users/brian/NRdata:/data -v /Users/brian/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
 
 ### Step 6. Updating Docker container in dockerhub
