@@ -169,4 +169,4 @@ In this tutorial you:
 * Inspected the created images
 * Ran the newly created container on your local machine and optionally on a system with a different CPU architecture
 
-Now you can create a Docker image containing your Node-RED application, but to make the container suitable for running in a cloud environment there is a further consideration needed to allow the cloud environment to provide configuration at runtime to the container, which is the subject of the [next tutorial](https://TODO_ADD_LINK).
+Now you can create a Docker image containing your Node-RED application, but to make the container suitable for running in a cloud environment there is a further consideration needed to allow the cloud environment to provide configuration at runtime to the container, which is the subject of the [next tutorial](../Node-RED%20config%20from%20environment/README.md).
