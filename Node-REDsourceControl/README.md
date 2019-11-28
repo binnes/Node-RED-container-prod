@@ -132,6 +132,10 @@ Follow the instructions below to start Node-RED with the project feature enabled
 
 ### Step 3. Using Source control in Node-RED
 
+The git integration built into the projects feature of Node-RED will allow you to clone an existing git repository or create a new repository from within the Node-RED editor.  You will also find a new **Projects** entry in the main menu, where you can change the current project, create a new project or look at the current project settings.  Node-RED stores projects files in a directory called **projects** in your Node-RED user directory, this defaults to **.node-red/projects** in your home directory on your operating system.  Each projects is stored in its own directory within the projects directory.
+
+For this tutorial the Node-RED user directory is the NRdata directory you created in the previous step, so you will find project directories in **NRdata/projects**.
+
 1. Open a browser to access your local Node-RED runtime on [http://localhost:1880](http://localhost:1880) and you should see the Projects wizard, as projects are enabled and no projects exist yet:  
   ![project wizard](image/projectWizard.png)
 2. Select the Clone Repository.
@@ -140,7 +144,8 @@ Follow the instructions below to start Node-RED with the project feature enabled
       ![github page](image/copyGitURL.png)
     * Back in the Node-RED editor window, paste the github URL into the **Git repository URL** field.
     * Enter your git credentials for the Username and Password fields (use the Personal Access Token as the password if you have one set on your github account - your github account password will not work if a personal access token is defined) then press the **Clone project** button when all the details have been completed - leave the Credentials encryption key field blank  
-      ![Clone repo](image/cloneRepo.png)
+      ![Clone repo](image/cloneRepo.png)  
+      *Note: Leaving the **credentials encryption key** field blank means that any credentials entered in any node configuration will be checked into git unencrypted.  For this tutorial this isn't an issue as we want to go look at the credentials.  For your own projects you may want to enter an encryption key, unless you plan to provide all credentials at run time and want to inspect the credentials file to verify there are no captured credentials.*
 3. Drag an inject and debug node onto the sheet and connect them to create a basic flow then deploy the changes  
   ![basic flow](image/basicFlow.png)
 4. Switch to the project history section in the side panel, where you can see the flows.json file has uncommitted local changes.  Move your mouse over the entry and press the **+** button to stage the change  
