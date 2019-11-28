@@ -76,7 +76,7 @@ X86_64 is the predominant CPU architecture in use today in public cloud, but the
 
 The 12-factor app [dependency rule](https://12factor.net/dependencies) is to *Explicitly declare and isolate dependencies*
 
-For a Node-RED application all dependencies are specified in the package.json file.  When adding additional nodes to the Node-RED pallet, ensure they are added to the package.json file rather than using the pallet management feature within the editor.
+For a Node-RED application all dependencies are specified in the package.json file.  When adding additional nodes to the Node-RED pallet, ensure they are added to the package.json.
 
 However, there are still '*hidden*' dependencies that can creep into a project when a package has some native dependencies that need to be installed in the host system running the application.
 
