@@ -88,7 +88,7 @@ It is also possible get a node configuration property to be replaced by an envir
 To set an environment variable named **WWW** in a command window:
 
 * Linux and MacOS : `export WWW=123`
-* Windows : `set WWW=q123`
+* Windows : `set WWW=123`
 
 This sets the environment variable only for the current terminal or command window session.  There are ways on the different operating systems to set environment variables, so they are always set.
 
@@ -113,8 +113,10 @@ WWW
 
 the **VAR1** environment variable would be set to *abc* and **WWW** would be set to the value of the local environment variable **WWW** when the docker command was run.
 
-1. Restart Node-RED setting the WWW environment variable:
+1. Stop any running Node-RED instances, then start Node-RED setting the WWW environment variable (If you have the Docker container from the previous tutorial still running then you need to stop that):
 
+    * `docker stop dockerNR`
+    * `docker rm dockerNR`
     * `docker stop mynodered`
     * `docker rm mynodered`
     * choose the appropriate command for your operating system (replacing *YOUR-USERNAME* with your own username):

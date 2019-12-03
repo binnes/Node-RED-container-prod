@@ -56,6 +56,8 @@ To complete this tutorial, you need:
 * some experience of using Node-RED
 * a laptop/workstation running an up to date version of Linux, Mac OS or Windows
 * an up to date version of [Docker](https://www.docker.com) on your laptop/workstation (version 19.03 or higher should be returned by the `docker version` command)
+  * Windows users need to ensure that Docker is using Linux containers.  This setting is available by right clicking the Docker icon in the status section of the Windows task bar, usually at the bottom of the screen.  You should see an option to switch to Windows containers.  If you have an option to switch to Linux containers, you need to select it as you are currently using windows based containers.  
+  ![Switch to Linux containers](image/linuxContainers.png)
 * a [github](https://github.com) account
 * [git tools](https://git-scm.com/downloads) installed on your laptop/workstation
 

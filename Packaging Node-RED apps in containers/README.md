@@ -152,7 +152,7 @@ In this tutorial we will use the new **buildx** feature of Docker.  At the time 
   replace **YOUR-DOCKER-USERNAME** with your docker username.  Here you see we are asking to build an image for 3 different architectures.  AMD/Intel 64 bit, ARM 64bit and ARM 32bit v7 (Raspberry Pi 3/4).  You can also add additional architectures, such as **linux/s390x** to add support for IBM Z systems or **linux/ppc64le** for IBM POWER systems.  Note the more architectures you select to build, the longer the build takes.
 8. Inspect the image using command  
   `docker buildx imagetools inspect docker.io/YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
-9. Stop your local Node-RED using command `docker kill mynodered` in a command line window,  then run the container using command :  
+9. Stop your local Node-RED using command `docker stop mynodered` in a command line window,  then run the container using command :  
   `docker run -dit -p 1880:1880 --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
 10. Test your container.  
     * You will not be able to launch at the Editor on the base URL, as this has been modified in the sample project **settings.js** file.  The editor can be launched at [**/admin**](http://localhost:1880/admin).  In a production Node-RED container you should not be able to alter the application, so the editor needs to be disabled.  This can be achieved by setting the **httpAdminRoot** property in the **settings.js** file to **false**.  Details of the Node-RED configuration options can be found in the [Node-RED documentation](https://nodered.org/docs/user-guide/runtime/configuration).  
