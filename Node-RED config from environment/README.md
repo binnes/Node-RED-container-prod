@@ -141,8 +141,10 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
   
     ```git clone git@github.com:binnes/moreNodeRedWorkshop.git```
 
-2. Add a docker network bridge to allow the Node-RED container to find the MQTT broker container.  A user-defined network bridge allows containers connected to the same bridge to communicate, without exporting ports and also provides automatic name resolution using the --name parameter provided at container start:  
-`docker network create NRbridge`
+2. Add a docker network bridge to allow the Node-RED container to find the MQTT broker container.  A user-defined network bridge allows containers connected to the same bridge to communicate, without exporting ports and also provides automatic name resolution using the --name parameter provided at container start:
+
+    ```docker network create NRbridge```
+
 3. Start the MQTT Mosquitto container:
 
     ```docker run -itd -p 8883:8883 -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mqttBroker eclipse-mosquitto```
@@ -167,11 +169,18 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
     ```docker logs -f mqttBroker```
 
+    Press and hold the Control key, then press C (Ctrl-C) to exit following the mqtt broker logs
+
 ### Step 3. MQTT node config
 
 In this section you will add some additional nodes to Node-RED, which connect to your local MQTT broker.
 
-1. Restart the Node-RED service on your system.  To connect to the broker the Node-RED container need access to the broker certificates, so we will map the same volume as we did when starting the broker, as the certificates are in a cert sub-directory.  We also need to add the --network option to put the Node-RED container instance on the same Docker network bridge as the MQTT broker container instance.  Run the appropriate command for your operating system (replacing *YOUR-USERNAME* with your own username):
+1. Restart the Node-RED service on your system.  To connect to the broker the Node-RED container need access to the broker certificates, so we will map the same volume as we did when starting the broker, as the certificates are in a cert sub-directory.  We also need to add the --network option to put the Node-RED container instance on the same Docker network bridge as the MQTT broker container instance.  
+
+    `docker stop mynodered`  
+    `docker rm mynodered`
+
+    Now run the appropriate command for your operating system (replacing *YOUR-USERNAME* with your own username):
       * **Windows**:  
           `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
       * **Mac OS**:  
@@ -311,18 +320,17 @@ As there are quite a few environment variables that need to be set, so we will s
 To create a containerised version of the latest version of the Node-RED application you need to rebuild and push the updated Node-RED application.
 
 1. Go to the GitHub integration tab in the Node-RED editor and commit and push the latest version of your flow
-2. Ensuring you are in the project directory in a command or terminal window, build the container with the command:  
-    `docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t [insert your dockerhub username here]/node-red-docker-sample --push .`  
-    Customise the command as required
+2. Ensuring you are in the project directory in a command or terminal window, build the container with the command (replace YOUR-DOCKER-USERNAME with your docker username):  
+    `docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t YOUR-DOCKER-USERNAME/node-red-docker-sample --push .`
 3. Stop the existing Node-RED docker instance and remove it.  You cannot have 2 instances of a Docker container with the same name, so if the previous instance of the dockerNR container still exists, then you need to remove it before you can deploy a new instance:  
     * `docker stop mynodered`
     * `docker rm mynodered`
     * `docker rm dockerNR`
-4. Pull the container image from dockerhub to ensure you have the latest version locally:  
-`docker pull [your docker hub username]/node-red-docker-sample:latest`
-5. Run the new container.  For docker you can use the **--env-file** option to pass in environment variables using the env.list file created for the previous step.  Ensuring you are still in your project directory (containing the env.list file) start your containerised Node-RED application.  You also need the container on the NRbridge network bridge to be able to access the MQTT broker container:
+4. Pull the container image from dockerhub to ensure you have the latest version locally (replace YOUR-DOCKER-USERNAME with your docker username):  
+`docker pull YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
+5. Run the new container.  For docker you can use the **--env-file** option to pass in environment variables using the env.list file created for the previous step.  Ensuring you are still in your project directory (containing the env.list file) start your containerised Node-RED application.  You also need the container on the NRbridge network bridge to be able to access the MQTT broker container (replace the path to the moreNodeRedWorkshop directory and YOUR-DOCKER-USERNAME with your docker username):
 
-    `docker run -dit --env-file env.list -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto -p 1880:1880 --network NRbridge --name dockerNR [your docker hub username]/node-red-docker-sample:latest`
+    `docker run -dit --env-file env.list -v <full path to where moreNodeREDWorkshop repo cloned>/moreNodeRedWorkshop/en/part5/broker:/mosquitto -p 1880:1880 --network NRbridge --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
 
     Notice:
 
