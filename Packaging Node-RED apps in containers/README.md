@@ -127,9 +127,13 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
 
 In this tutorial we will use the new **buildx** feature of Docker.  At the time of writing this content it is an experimental feature in Docker, so experimental features need to be enabled in Docker to get access to buildx:
 
-1. Enable experimental features in Docker:
+1. Enable buildx in Docker:
     * Linux
       * Environment variable **DOCKER_CLI_EXPERIMENTAL** should be set to **enabled**
+      * To build multi-architecture images on Linux, architecture emulation needs to be added to Linux.  This can be done by running the following command:
+
+          `docker run --rm --privileged docker/binfmt:66f9012c56a8316f9244ffd7622d7c21c1f6f28d`
+
     * MacOS and Windows
       * Start Docker if it is not running
       * Click the Docker icon (usually in bottom notification popup on Windows, top menu bar on MacOS) and select **settings** or **Preferences** then the **Command Line** section
