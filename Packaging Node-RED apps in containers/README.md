@@ -164,7 +164,7 @@ In this tutorial we will use the new **buildx** feature of Docker.  At the time 
     `docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t YOUR-DOCKER-USERNAME/node-red-docker-sample --push .`
 
     replace **YOUR-DOCKER-USERNAME** with your docker username.  Here you see we are asking to build an image for 3 different architectures.  AMD/Intel 64 bit, ARM 64bit and ARM 32bit v7 (Raspberry Pi 3/4).  You can also add additional architectures, such as **linux/s390x** to add support for IBM Z systems or **linux/ppc64le** for IBM POWER systems.  Note the more architectures you select to build, the longer the build takes.
-8. Inspect the image using command:
+8. Inspect the image using command (replace **YOUR-DOCKER-USERNAME** with your docker username):
 
     `docker buildx imagetools inspect docker.io/YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
 
