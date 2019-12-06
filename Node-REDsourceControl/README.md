@@ -116,16 +116,25 @@ In this tutorial we will run Node-RED in a Docker image, this removes the need f
 Follow the instructions below to start Node-RED with the project feature enabled.  The commands need to be entered in a command or terminal window, running as your normal login user:
 
 1. If Node-RED is already running on your system, stop it
-2. Create a new directory called **NRdata** in your home directory to use as the Node-RED userDirectory:  
-`mkdir NRdata`
-    * *Note: on Linux the NRdata directory needs to be writeable by user with UID 1000.  If your user UID is not 1000 then make the directory writeable by everyone :  
-    `chmod 777 NRdata`*
+2. Create a new directory called **NRdata** in your home directory to use as the Node-RED userDirectory:
+
+    `mkdir NRdata`
+
+    * *Note: on Linux the NRdata directory needs to be writeable by user with UID 1000.  If your user UID is not 1000 then make the directory writeable by everyone :*
+
+      `chmod 777 NRdata`
+  
 3. To start Node-RED use command (select your operating system.  You will need to update the path to the NRdata directory):
-    * **Windows**:  
+    * **Windows**:
+
         `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+
     * **Mac OS**:  
+
         `docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
+
     * **Linux**:  
+
         `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 
     Note:
