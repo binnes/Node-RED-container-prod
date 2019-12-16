@@ -49,6 +49,10 @@ In this tutorial, you will learn how to:
   * pull changes from a git server
   * resolve merge conflicts within the Node-RED editor
 
+The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.
+
+[![](http://img.youtube.com/vi/B3rek65q7RQ/0.jpg)](http://www.youtube.com/watch?v=B3rek65q7RQ "Demonstration of instructor completing this tutorial")
+
 ## Prerequisites
 
 To complete this tutorial, you need:
@@ -71,10 +75,6 @@ You can complete this tutorial in less than 20 minutes.
 1. [Enable source control in Node-RED](#step-2-enable-source-control-in-node-red)
 1. [Using Source control in Node-RED](#step-3-using-source-control-in-node-red)
 1. [Pulling changes and handling merge conflicts](#step-4-pulling-changes-and-handling-merge-conflicts)
-
-The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to Step 1.
-
-[![](http://img.youtube.com/vi/B3rek65q7RQ/0.jpg)](http://www.youtube.com/watch?v=B3rek65q7RQ "Demonstration of instructor completing this tutorial")
 
 ### Step 1. Codebase
 
