@@ -131,6 +131,11 @@ In this tutorial we will use the new **buildx** feature of Docker.  At the time 
 1. Enable buildx in Docker:
     * Linux
       * Environment variable **DOCKER_CLI_EXPERIMENTAL** should be set to **enabled**
+
+        This can be done on the command line, or added to your .profile or active config file sourced when a new login shell is launched:
+
+        `export DOCKER_CLI_EXPERIMENTAL=enabled`
+
       * To build multi-architecture images on Linux, architecture emulation needs to be added to Linux.  This can be done by running the following command:
 
           `docker run --rm --privileged docker/binfmt:66f9012c56a8316f9244ffd7622d7c21c1f6f28d`
@@ -139,10 +144,9 @@ In this tutorial we will use the new **buildx** feature of Docker.  At the time 
       * Start Docker if it is not running
       * Click the Docker icon (usually in bottom notification popup on Windows, top menu bar on MacOS) and select **settings** or **Preferences** then the **Command Line** section
       * Enable Experimental features
-2. Open a command or terminal window then :
+2. Open a command or terminal window then navigate to the project directory:
     * navigate to your home directory
     * navigate to the **NRdata/projects/Node-RED-Docker** subdirectory within your home directory. This directory should contain the Dockerfile.  
-    You will use the new **docker buildx** command to build and push a multi-arch image to dockerhub.
 3. Before you can build a container you need to create a new builder.  Enter the command:
 
     `docker buildx create --name NRbuilder --use`
@@ -169,11 +173,13 @@ In this tutorial we will use the new **buildx** feature of Docker.  At the time 
 
     `docker buildx imagetools inspect docker.io/YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
 
-9. Stop your local Node-RED using command:
+9. Stop your local Node-RED
+
+    *(we want to test the new container and will use the same Node-RED port of 1880, so can't have 2 applications listening on the same port)*:
 
     `docker stop mynodered`
 
-    in a command line window,  then run the container using command :
+    in a command line window,  start your new container using command :
 
     `docker run -dit -p 1880:1880 --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest`
 
