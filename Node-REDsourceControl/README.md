@@ -17,7 +17,7 @@ meta_description: "In this tutorial you will learn how to create enable the Node
 #     slug:
 
 related_links:
-  - title:  "Get started with Node-RED documentation"
+  - title:  "Version control with Node-RED"
     url: "https://nodered.org/docs/getting-started/"
 
 services:
@@ -29,7 +29,7 @@ tags:
 components:
  - "node-red"
 
-title:  "Node-RED with source control"
+title:  "Version Control with Node-RED"
 subtitle:    "Learn how to enable the project feature in the Node-RED editor and show how to use the git integration within the editor to enable source control of a Node-RED application"
 
 type: howto
