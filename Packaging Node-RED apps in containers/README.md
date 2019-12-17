@@ -54,6 +54,7 @@ To complete this tutorial, you need:
 * some experience of using Node-RED
 * a laptop/workstation running an up to date version of Linux, Mac OS or Windows
 * an up to date version of [Docker](https://www.docker.com) on your laptop/workstation (version 19.03 or higher should be returned by the `docker version` command)
+* An active [Docker ID](https://www.docker.com) to be able to sign into [dockerhub](https://hub.docker.com)
 * a [github](https://github.com) account
 * [git tools](https://git-scm.com/downloads) installed on your laptop/workstation
 * Completed tutorial **Version Control with Node-RED** and have the forked template repository in your github account, which is also cloned within a Node-RED project on your laptop/workstation
