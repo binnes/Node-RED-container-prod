@@ -114,7 +114,9 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
       [{"id":"55dd0376.f7c64c","type":"http in","z":"3af82246.3634ae","name":"","url":"/hello","method":"get","upload":false,"swaggerDoc":"","x":130,"y":420,"wires":[["c656aba7.944288"]]},{"id":"c2380ca8.0463","type":"http response","z":"3af82246.3634ae","name":"","statusCode":"","headers":{},"x":470,"y":420,"wires":[]},{"id":"c656aba7.944288","type":"change","z":"3af82246.3634ae","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"{\"text\":\"Hello\"}","tot":"json"}],"action":"","property":"","from":"","to":"","reg":false,"x":300,"y":420,"wires":[["c2380ca8.0463"]]}]
       ```
 
-    * press the **Deploy** button to make the new nodes live (you can now access the new endpoint running on your local Node-RED instance [http://localhost:1880/hello](http://localhost:1880/hello)
+    * press the **Deploy** button to make the new nodes live (you can now access the new endpoint running on your local Node-RED instance [http://localhost:1880/hello](http://localhost:1880/hello).
+
+        *Note: This web endpoint generates a JSON response.  Most browsers can display JSON content, but not all can without having a plugin installed.   If you get prompted to install a plugin you can choose to install one, or just take the request as validating that the endpoint worked*
 
 3. Commit and push the change to git
     * switch to the git side panel
