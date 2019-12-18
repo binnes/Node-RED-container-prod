@@ -212,7 +212,7 @@ In this section you will add some additional nodes to Node-RED, which connect to
     ```
 
 3. Open up the configuration of either of the mqtt nodes and select the edit icon next to the MQTT server config ![open server config](image/openMQTTconfig.png)
-4. Switch to the **Security** tab and enter the MQTT broker credentials.  Thee default credentials are **mosquitto** / **passw0rd** ![mqtt credentials](image/mqttCredentials.png)
+4. Switch to the **Security** tab and enter the MQTT broker credentials.  The default credentials are **mosquitto** / **passw0rd** ![mqtt credentials](image/mqttCredentials.png)
 5. Switch to the **Connection** tab and open the TLS Configuration ![TLS config](image/openTLSconfig.png)
 6. The root certificate information should be already populated.  The certificate is read from the imported volume Docker mapped to the /mosquitto path ![ca cert](image/TLScaCert.png)
 7. Press the update and Done buttons to save the configuration, then Deploy the flow. You should see the MQTT nodes connected to your mqtt broker ![mqtt connected](image/mqttConnected.png)
@@ -229,7 +229,7 @@ To prevent config being captured in a flow you can replace all configuration of 
     * set the Client ID to ${MQTT_CLIENT_ID}
 2. Switch to the Security tab:
     * set the Username to ${MQTT_USER}
-    * set the Password tp ${MQTT_PWD} (you won't be able to see this, as the password field hides the content)
+    * set the Password to ${MQTT_PWD} (you won't be able to see this, as the password field hides the content)
 3. Switch back to the Connection tab and open the TLS config editor
     * set the CA Certificate to ${MQTT_CA_CERT}
     * set the Server name to ${MQTT_HOST}
