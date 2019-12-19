@@ -132,10 +132,19 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
           `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red`
 
-2. Modify the inject node you added in the **Node-RED with source control** tutorial to set the payload to the value of the **WWW** environment variable  
-![inject env var](image/injectEnv.png)
-3. Modify the inject node configuration to inject a string and set the string value to **${WWW}** which produces the same result as using the env variable setting:  
-![env var substitutions](image/envVarSubst.png).
+2. Modify the inject node you added in the **Node-RED with source control** tutorial to set the payload to the value of the **WWW** environment variable
+
+    ![inject env var](image/injectEnv.png)
+
+    Deploy the change then test the outcome by pressing the button on the Inject node to send a message.  Switch to the debug tab to see the outcome
+
+    ![Test environment variables](image/testEnvVar.png)
+
+3. Modify the inject node configuration to inject a string and set the string value to **${WWW}** which produces the same result as using the env variable setting:
+
+    ![env var substitutions](image/envVarSubst.png)
+
+    Test the outcome by deploying the change, then press the button on the inject node - the output should be the same as the previous output, showing environment variable substitution.
 
 ### Step 2. Run a local broker
 
