@@ -51,7 +51,7 @@ In this tutorial, you will learn how to:
 
 The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.
 
-[![](http://img.youtube.com/vi/B3rek65q7RQ/0.jpg)](http://www.youtube.com/watch?v=B3rek65q7RQ "Demonstration of instructor completing this tutorial")
+[!["Demonstration of instructor completing this tutorial"](http://img.youtube.com/vi/B3rek65q7RQ/0.jpg)](http://www.youtube.com/watch?v=B3rek65q7RQ "Demonstration of instructor completing this tutorial")
 
 ## Prerequisites
 
@@ -64,6 +64,8 @@ To complete this tutorial, you need:
   ![Switch to Linux containers](image/linuxContainers.png)
 * a [github](https://github.com) account
 * [git tools](https://git-scm.com/downloads) installed on your laptop/workstation
+
+You will notice that a Node-RED installation is not a prerequisite.  In this tutorial all development is done using a Node-RED container.  Using a container ensures that all developers working on a project use a common Node-RED installation, with an '*approved*' set of Node.js packages installed in the container and nodes in the Node-RED pallet.
 
 ## Estimated time
 
