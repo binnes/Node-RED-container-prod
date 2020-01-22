@@ -3,6 +3,8 @@ Tutorials to create production ready Node-RED applications
 
 To use Node-RED in a DevOps pipeline the development process needs to looks like other programming languages:
 
+![Node-RED production pipeline](image/NRprod.png)
+
 1. Developer works locally to create applications
 2. Code is delivered to a version control system, such as Git
 3. A build process creates the application from source, packages it as a container and stores it in a container registry
