@@ -1,7 +1,12 @@
 # Node-RED-container-prod
-Tutorials to create production ready Node-RED applications
 
-To use Node-RED in a DevOps pipeline the development process needs to looks like other programming languages:
+Late in 2019 Node-RED released version 1.0.  In the following video the use of Low Code development for production use cases is discussed.
+
+[!["Node-RED development for production applications"](http://img.youtube.com/vi/UpdgM66Au_U/0.jpg)](https://youtu.be/UpdgM66Au_U "Node-RED development for production applications")
+
+One of the reported difficulties with using Node-RED in production is how to integrate Node-RED into a DevOps process.  Here are a series of Tutorials to show how to integrate Node-RED into a dev ops pipeline and also the considerations that need to be made when creating the application, so it can be deployed to a cloud environment.
+
+To use Node-RED in a DevOps pipeline, the development process needs to looks like other programming languages:
 
 ![Node-RED production pipeline](image/NRprod.png)
 
