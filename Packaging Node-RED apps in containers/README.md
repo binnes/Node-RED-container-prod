@@ -47,6 +47,10 @@ In this tutorial, you will learn how to:
 * Build a multi-architecture container for a Node-RED application and push it to a container registry
 * Run a containerised Node-RED application
 
+The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.
+
+[!["Demonstration of instructor completing this tutorial"](http://img.youtube.com/vi/0fwzo4IPaHs/0.jpg)](https://youtu.be/0fwzo4IPaHs "Demonstration of instructor completing this tutorial")
+
 ## Prerequisites
 
 To complete this tutorial, you need:

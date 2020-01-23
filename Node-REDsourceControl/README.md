@@ -51,7 +51,7 @@ In this tutorial, you will learn how to:
 
 The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.
 
-[!["Demonstration of instructor completing this tutorial"](http://img.youtube.com/vi/B3rek65q7RQ/0.jpg)](http://www.youtube.com/watch?v=B3rek65q7RQ "Demonstration of instructor completing this tutorial")
+[!["Demonstration of instructor completing this tutorial"](http://img.youtube.com/vi/ecrjDfZth-w/0.jpg)](https://youtu.be/ecrjDfZth-w "Demonstration of instructor completing this tutorial")
 
 ## Prerequisites
 

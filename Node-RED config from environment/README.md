@@ -47,6 +47,10 @@ In this tutorial, you will learn how to:
 * set environment variables when running a Docker container
 * enable containers to communicate using a Docker user-defined bridge
 
+The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.
+
+[!["Demonstration of instructor completing this tutorial"](http://img.youtube.com/vi/apKR3UhacWI/0.jpg)](https://youtu.be/apKR3UhacWI "Demonstration of instructor completing this tutorial")
+
 ## Prerequisites
 
 To complete this tutorial, you need:
