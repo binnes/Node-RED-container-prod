@@ -228,3 +228,5 @@ In this tutorial you:
 * pulled changes from GitHub and resolved a merge conflict within the Node-RED editor
 
 You can now work with Node-RED in a team environment synchronising via a Git repository, ensuring all changes to your Node-RED applications are version controlled.
+
+Move onto the [next tutorial](../Packaging%20Node-RED%20apps%20in%20containers/README.md), where you will learn how to package your application into a container.
