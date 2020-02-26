@@ -1,40 +1,4 @@
----
-draft: true
-
-authors:
-  - name: "Brian Innes"
-    email: "binnes@uk.ibm.com"
-
-completed_date: ""
-last_updated:  "2019-11-25"
-
-abstract: "In this tutorial you will learn how update a Node-RED flow to allow configuration to be provided in the environment at run time"
-excerpt:  "In this tutorial you will learn how update a Node-RED flow to allow configuration to be provided in the environment at run time"
-meta_description: "In this tutorial you will learn how update a Node-RED flow to allow configuration to be provided in the environment at run time"
-
-# related_content:
-#   - type: announcements|articles|blogs|patterns|series|tutorials|videos
-#     slug:
-
-related_links:
-  - title:  "Get started with Node-RED documentation"
-    url: "https://nodered.org/docs/getting-started/"
-
-services:
-
-meta_keywords:  "node-red, containers, cloud native, config"
-primary_tag: "node-red"
-tags:
- - "node-red"
-components:
- - "node-red"
-
-title:  "Node-RED configuration from the environment"
-subtitle:    "Learn how to create Node-RED applications able to receive their configuration from the environment at runtime"
-
-type: howto
-
----
+# Node-RED configuration from environment
 
 In this tutorial you will learn how to create Node-RED applications able to receive their configuration from the environment at runtime
 

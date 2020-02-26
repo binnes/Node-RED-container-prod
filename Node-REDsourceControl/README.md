@@ -1,40 +1,4 @@
----
-draft: true
-
-authors:
-  - name: "Brian Innes"
-    email: "binnes@uk.ibm.com"
-
-completed_date: ""
-last_updated:  "2019-11-20"
-
-abstract: "In this tutorial you will learn how to create enable the Node-RED project feature, which adds git integration to the Node-RED editor.  You will learn how use the git integration features of the Node-RED editor to allow your Node-RED applications to be under source control management."
-excerpt:  "In this tutorial you will learn how to create enable the Node-RED project feature, which adds git integration to the Node-RED editor.  You will learn how use the git integration features of the Node-RED editor to allow your Node-RED applications to be under source control management."
-meta_description: "In this tutorial you will learn how to create enable the Node-RED project feature, which adds git integration to the Node-RED editor.  You will learn how use the git integration features of the Node-RED editor to allow your Node-RED applications to be under source control management."
-
-# related_content:
-#   - type: announcements|articles|blogs|patterns|series|tutorials|videos
-#     slug:
-
-related_links:
-  - title:  "Version control with Node-RED"
-    url: "https://nodered.org/docs/getting-started/"
-
-services:
-
-meta_keywords:  "node-red, cloud native"
-primary_tag: "node-red"
-tags:
- - "node-red"
-components:
- - "node-red"
-
-title:  "Version Control with Node-RED"
-subtitle:    "Learn how to enable the project feature in the Node-RED editor and show how to use the git integration within the editor to enable source control of a Node-RED application"
-
-type: howto
-
----
+# Node-RED Source Control
 
 In this tutorial you will learn how to enable git integration in Node-RED.  Once git integration has been turned on you will learn how to use the git integration features within the Node-RED editor.
 

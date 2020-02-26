@@ -1,40 +1,4 @@
----
-draft: true
-
-authors:
-  - name: "Brian Innes"
-    email: "binnes@uk.ibm.com"
-
-completed_date: ""
-last_updated:  "2019-11-22"
-
-abstract: "In this tutorial you will learn how to package a Node-RED application into a container and customise the runtime for production running rather than application creation"
-excerpt:  "In this tutorial you will learn how to package a Node-RED application into a container and customise the runtime for production running rather than application creation"
-meta_description: "In this tutorial you will learn how to package a Node-RED application into a container and customise the runtime for production running rather than application creation"
-
-# related_content:
-#   - type: announcements|articles|blogs|patterns|series|tutorials|videos
-#     slug:
-
-related_links:
-  - title:  "Get started with Node-RED documentation"
-    url: "https://nodered.org/docs/getting-started/"
-
-services:
-
-meta_keywords:  "node-red, containers, cloud native"
-primary_tag: "node-red"
-tags:
- - "node-red"
-components:
- - "node-red"
-
-title:  "Package a Node-RED application in a container"
-subtitle:    "Learn how to package a Node-RED application into a container and customise the Node-RED runtime for production running rather than application creation"
-
-type: howto
-
----
+# Packaging Node-RED apps in containers
 
 In this tutorial you will learn how to package a Node-RED application into a container and customise the runtime for production running rather than application creation
 
