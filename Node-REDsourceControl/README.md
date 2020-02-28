@@ -193,4 +193,4 @@ In this tutorial you:
 
 You can now work with Node-RED in a team environment synchronising via a Git repository, ensuring all changes to your Node-RED applications are version controlled.
 
-Move onto the [next tutorial](../Packaging%20Node-RED%20apps%20in%20containers/README.md), where you will learn how to package your application into a container.
+Move onto the [next tutorial](../Packaging-Node-RED-apps-in-containers/README.md), where you will learn how to package your application into a container.
