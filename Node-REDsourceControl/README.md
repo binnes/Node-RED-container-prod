@@ -108,8 +108,9 @@ Follow the instructions below to start Node-RED with the project feature enabled
         `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 
     Note:
-      * the **-e** option sets the **NODE_RED_ENABLE_PROJECTS** environment variable
-      * the **-v** option maps your local **NRdata** directory into the container at location **/data**, which is configured as the userDirectory for Node-RED.
+      * the **-e** option is short for **--env** and sets the **NODE_RED_ENABLE_PROJECTS** environment variable
+      * the **-v** option is short for **--volume** maps your local **NRdata** directory into the container at location **/data**, which is configured as the userDirectory for Node-RED.
+      * to see all the possible options for the Docker run command use ```docker run --help```
 
 ### Step 3. Using Source control in Node-RED
 
