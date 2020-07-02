@@ -1,7 +1,5 @@
 # Low Code Development with Node-RED for Production
 
-Please follow the link for formatted documentation for these tutorials : [https://binnes.github.io/Node-RED-container-prod/](https://binnes.github.io/Node-RED-container-prod/)
-
 Late in 2019 Node-RED released version 1.0.  In the following video the use of Low Code development for production use cases is discussed.
 
 [!["Node-RED development for production applications"](http://img.youtube.com/vi/UpdgM66Au_U/0.jpg)](https://youtu.be/UpdgM66Au_U "Node-RED development for production applications")
@@ -10,15 +8,17 @@ One of the reported difficulties with using Node-RED in production is how to int
 
 To use Node-RED in a DevOps pipeline, the development process needs to looks like other programming languages:
 
-![Node-RED production pipeline](docs/image/NRprod.png)
+![Node-RED production pipeline](image/NRprod.png)
 
 1. Developer works locally to create applications
 2. Code is delivered to a version control system, such as Git
 3. A build process creates the application from source, packages it as a container and stores it in a container registry
 4. At deploy time the container is pulled from the registry and run, with configuration data being provided by a runtime management environment, such as Kubernetes or OpenShift
 
-The 3 tutorials in this series show you how to use Node-RED so it fits this way of working so Node-RED can be used for production workloads.
+## Tutorials
 
-* Tutorial 1 : [Version Control with Node-RED](docs/Node-REDsourceControl/README.md)
-* Tutorial 2 : [Package Node-RED app in a container](docs/Packaging-Node-RED-apps-in-containers/README.md)
-* Tutorial 3 : [Node-RED config from environment](docs/Node-RED-config-from-environment/README.md)
+The 3 tutorials in this series show you how to use Node-RED with this way of working so Node-RED can be used to develop production workloads.
+
+* Tutorial 1 : [Version Control with Node-RED](Node-REDsourceControl/README.md)
+* Tutorial 2 : [Package Node-RED app in a container](Packaging-Node-RED-apps-in-containers/README.md)
+* Tutorial 3 : [Node-RED config from environment](Node-RED-config-from-environment/README.md)

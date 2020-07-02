@@ -1,0 +1,20 @@
+site_name: Low Code Development for Production
+site_url: https://binnes.github.io/Node-RED-container-prod/
+repo_url: https://github.com/binnes/Node-RED-container-prod
+theme:
+    name: mkdocs
+#    name: readthedocs
+    nav_style: dark
+    shortcuts:
+        help: 191    # ?
+        next: 78     # n
+        previous: 80 # p
+        search: 83   # s
+nav:
+  - Home: index.md
+  - Part 1:
+    - Source Control : Node-REDsourceControl/README.md
+  - Part 2:
+    - Packaging Applications : Packaging-Node-RED-apps-in-containers/README.md
+  - Part 3:
+    - Config from Environment : Node-RED-config-from-environment/README.md
