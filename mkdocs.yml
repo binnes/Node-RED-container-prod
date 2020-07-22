@@ -30,3 +30,6 @@ nav:
     - Packaging Applications : Packaging-Node-RED-apps-in-containers/README.md
   - Part 3:
     - Config from Environment : Node-RED-config-from-environment/README.md
+google_analytics:
+  - 'UA-172132667-1'
+  - 'binnes.github.io/Node-RED-container-prod/'
