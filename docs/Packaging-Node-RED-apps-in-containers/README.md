@@ -74,7 +74,7 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
 2. Import the following JSON to add the **/hello** endpoint:
 
     * to import the flow select the main menu (☰), then the import option from the menu
-        ![main menu](image/mainMenu.png)
+        ![main menu](image/mainMenu.png){style="width: 35%" .center}
     * copy and paste the JSON below into the Import nodes window, then press the **Import** button to import the nodes
         ![import nodes](image/importNodes.png)
 

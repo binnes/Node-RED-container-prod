@@ -102,7 +102,7 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
 2. Modify the inject node you added in the **Node-RED with source control** tutorial to set the payload to the value of the **WWW** environment variable
 
-    ![inject env var](image/injectEnv.png)
+    ![inject env var](image/injectEnv.png){style="width: 50%" .center}
 
     Deploy the change then test the outcome by pressing the button on the Inject node to send a message.  Switch to the debug tab to see the outcome
 
@@ -110,7 +110,7 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
 3. Modify the inject node configuration to inject a string and set the string value to **${WWW}** which produces the same result as using the env variable setting:
 
-    ![env var substitutions](image/envVarSubst.png)
+    ![env var substitutions](image/envVarSubst.png){style="width: 50%" .center}
 
     Test the outcome by deploying the change, then press the button on the inject node - the output should be the same as the previous output, showing environment variable substitution.
 
@@ -188,11 +188,11 @@ In this section you will add some additional nodes to Node-RED, which connect to
     [{"id":"8381a5c3.3cbf9","type":"mqtt in","z":"3af82246.3634ae","name":"","topic":"#","qos":"2","datatype":"json","broker":"d2a17e7.00b668","x":90,"y":660,"wires":[["ebab6856.8901c"]]},{"id":"ebab6856.8901c","type":"debug","z":"3af82246.3634ae","name":"","active":true,"tosidebar":true,"console":true,"tostatus":false,"complete":"true","targetType":"full","x":410,"y":660,"wires":[]},{"id":"92d9d4a9.e5cf4","type":"inject","z":"3af82246.3634ae","name":"","topic":"","payload":"","payloadType":"str","repeat":"10","crontab":"","once":false,"onceDelay":0.1,"x":110,"y":540,"wires":[["fb7b0c12.eb2e48"]]},{"id":"fb7b0c12.eb2e48","type":"change","z":"3af82246.3634ae","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"{ \"time\" : $fromMillis($toMillis($now()),'[H]:[m]:[s]') }","tot":"jsonata"}],"action":"","property":"","from":"","to":"","reg":false,"x":260,"y":560,"wires":[["d356084b.b81818"]]},{"id":"d356084b.b81818","type":"mqtt out","z":"3af82246.3634ae","name":"","topic":"time","qos":"","retain":"","broker":"d2a17e7.00b668","x":410,"y":580,"wires":[]},{"id":"d2a17e7.00b668","type":"mqtt-broker","z":"","name":"myBrokerConfig","broker":"mqttBroker","port":"8883","tls":"9ec473ef.e0678","clientid":"nodered","usetls":true,"compatmode":false,"keepalive":"60","cleansession":true,"birthTopic":"","birthQos":"0","birthRetain":"false","birthPayload":"","closeTopic":"","closeQos":"0","closeRetain":"false","closePayload":"","willTopic":"","willQos":"0","willRetain":"false","willPayload":""},{"id":"9ec473ef.e0678","type":"tls-config","z":"","name":"myTLSconfig","cert":"","key":"","ca":"/mosquitto/certs/mqtt_ca.crt","certname":"","keyname":"","caname":"","servername":"mqttBroker","verifyservercert":true}]
     ```
 
-3. Open up the configuration of either of the mqtt nodes and select the edit icon next to the MQTT server config ![open server config](image/openMQTTconfig.png)
-4. Switch to the **Security** tab and enter the MQTT broker credentials.  The default credentials are **mosquitto** / **passw0rd** ![mqtt credentials](image/mqttCredentials.png)
-5. Switch to the **Connection** tab and open the TLS Configuration ![TLS config](image/openTLSconfig.png)
-6. The root certificate information should be already populated.  The certificate is read from the imported volume Docker mapped to the /mosquitto path ![ca cert](image/TLScaCert.png)
-7. Press the update and Done buttons to save the configuration, then Deploy the flow. You should see the MQTT nodes connected to your mqtt broker ![mqtt connected](image/mqttConnected.png)
+3. Open up the configuration of either of the mqtt nodes and select the edit icon next to the MQTT server config ![open server config](image/openMQTTconfig.png){style="width: 50%" .center}
+4. Switch to the **Security** tab and enter the MQTT broker credentials.  The default credentials are **mosquitto** / **passw0rd** ![mqtt credentials](image/mqttCredentials.png){style="width: 50%" .center}
+5. Switch to the **Connection** tab and open the TLS Configuration ![TLS config](image/openTLSconfig.png){style="width: 50%" .center}
+6. The root certificate information should be already populated.  The certificate is read from the imported volume Docker mapped to the /mosquitto path ![ca cert](image/TLScaCert.png){style="width: 50%" .center}
+7. Press the update and Done buttons to save the configuration, then Deploy the flow. You should see the MQTT nodes connected to your mqtt broker ![mqtt connected](image/mqttConnected.png){.center}
 
 The sample application publishes the time to the configured MQTT broker every 10 seconds.  The second MQTT node subscribes to all topics (using # wildcard), so will receive all messages published by the first node.  It simply writes out the received message to the debug panel and also the system console (which makes the messages visible in the logs, which can be accessed using `docker logs -f mynodered` command)
 
@@ -213,7 +213,7 @@ To prevent config being captured in a flow you can replace all configuration of 
 4. Press Update and Done to close the config panels then Deploy the flow.
 
 This is what the config should now look like:
-![MQTT Config](image/mqttBrokerConfig.png) ![MQTT Security conifig](image/mqttBrokerSecurityConfig.png) and the resultant flow file segment :
+![MQTT Config](image/mqttBrokerConfig.png){style="width: 50%" .center} ![MQTT Security conifig](image/mqttBrokerSecurityConfig.png){style="width: 50%" .center} and the resultant flow file segment :
 
 ```JSON
   {
