@@ -12,6 +12,7 @@ plugins:
   - search
   - with-pdf:
       cover_subtitle: How to integrate Low Code development into a production development pipeline
+      output_path: pdf/lowCodeDev.pdf
 #      debug_html: true
 #      verbose: true
 markdown_extensions:
