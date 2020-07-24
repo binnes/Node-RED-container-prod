@@ -4,7 +4,7 @@ RUN apk add --no-cache \
     build-base \
     git \
     git-fast-import \
-    openssh\
+    openssh \
     gcc \
     musl-dev \
     jpeg-dev \
