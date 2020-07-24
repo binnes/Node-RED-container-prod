@@ -27,12 +27,9 @@ extra_css:
     - css/pdf-print.css
 nav:
   - Home: index.md
-  - Part 1:
-    - Source Control : Node-REDsourceControl/README.md
-  - Part 2:
-    - Packaging Applications : Packaging-Node-RED-apps-in-containers/README.md
-  - Part 3:
-    - Config from Environment : Node-RED-config-from-environment/README.md
+  - Source Control : Node-REDsourceControl/README.md
+  - Packaging Applications : Packaging-Node-RED-apps-in-containers/README.md
+  - Config from Environment : Node-RED-config-from-environment/README.md
 google_analytics:
   - 'UA-172132667-1'
   - 'binnes.github.io/Node-RED-container-prod/'
