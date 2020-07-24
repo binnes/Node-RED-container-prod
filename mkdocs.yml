@@ -11,7 +11,9 @@ use_directory_urls: false
 plugins:
   - search
   - with-pdf:
-      cover_subtitle: using a DHT11/22 and NeoPixel RGB LED with data analysis on the IBM Cloud
+      cover_subtitle: How to integrate Low Code development into a production development pipeline
+#      debug_html: true
+#      verbose: true
 markdown_extensions:
   - attr_list
   - admonition
