@@ -63,12 +63,18 @@ We are using the public github service to work through this tutorial, but Node-R
 Follow the instructions to fork the starter git repository, which is contains a starter template for a new project.  This will create a repository in your own github account so you can make changes to the content.
 
 1. Open a browser an navigate to the [git starter project repo](https://github.com/binnes/Node-RED-Docker)
+
 2. Make sure you are logged into your github account then press the **Fork** button so you have your own copy of the repo ![Fork](image/forkRepo.png)
-3. (OPTIONAL) If you have 2-factor authentication enabled on your github account, then you need to use a Personal Access Token when using the git command line tools.  To create a Personal Access Token:
+
+3. (OPTIONAL) If you have 2-factor authentication enabled on your github account, then you need to use a Personal Access Token when using the git command line tools.
+
+    To create a Personal Access Token:
     * Open the git settings  
-  ![settings](image/gitSettings.png){style="width: 20%" .center}
+            ![settings](image/gitSettings.png){style="width: 20%" .center}
     * select **Developer settings** then **Personal access tokens** then **Generate new token**.
-    * Give the token a use, select all scopes except `admin:enterprise` and `admin:gpg.key` scope then **Generate token** ![generate token](image/gitPAT.png) - record the token as you will need it later in the tutorial.
+    * Give the token a use, select all scopes except `admin:enterprise` and `admin:gpg.key` scope then **Generate token**
+            ![generate token](image/gitPAT.png)
+    * record the token as you will need it later in the tutorial.
 
 ### Step 2. Enable Source control in Node-RED
 
@@ -79,9 +85,12 @@ There are 2 ways of enabling projects in Node-RED:
 * Update the settings.js file in the userDirectory for Node-RED (this is the .node-red folder in your home folder by default)
 * Set the **NODE_RED_ENABLE_PROJECTS** environment variable before starting Node-RED
 
-In this tutorial we will run Node-RED in a Docker image, this removes the need for a local install of Node.js and node-RED, but if you have Node-RED already installed and want to enable the projects feature, then you should edit the settings.js file:
+!!! info
+      In this tutorial we will run Node-RED in a Docker image, this removes the need for a local install of Node.js and node-RED, but if you have Node-RED already installed and want to enable the projects feature, then you should edit the settings.js file:
 
-  *On your system edit file .node-red/settings.js in your home directory.  At the bottom of the file change the projects setting to `enabled : true` ![Enable Node-RED projects](image/enableProjectFeature.png)*
+      On your system edit file .node-red/settings.js in your home directory.  At the bottom of the file change the projects setting to `enabled : true`
+  
+      ![Enable Node-RED projects](image/enableProjectFeature.png){style="width: 75%" .center}
 
 Follow the instructions below to start Node-RED with the project feature enabled.  The commands need to be entered in a command or terminal window, running as your normal login user:
 
@@ -90,9 +99,10 @@ Follow the instructions below to start Node-RED with the project feature enabled
 
     `mkdir NRdata`
 
-    * *Note: on Linux the NRdata directory needs to be writeable by user with UID 1000.  If your user UID is not 1000 then make the directory writeable by everyone :*
+    !!! note
+          on Linux the NRdata directory needs to be writeable by user with UID 1000.  If your user UID is not 1000 then make the directory writeable by everyone:
 
-      `chmod 777 NRdata`
+          `chmod 777 NRdata`
   
 3. To start Node-RED use command (select your operating system.  You will need to update the path to the NRdata directory):
     * **Windows**:
@@ -107,10 +117,10 @@ Follow the instructions below to start Node-RED with the project feature enabled
 
         `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 
-    Note:
-      * the **-e** option is short for **--env** and sets the **NODE_RED_ENABLE_PROJECTS** environment variable
-      * the **-v** option is short for **--volume** and maps your local **NRdata** directory into the container at location **/data**, which is configured as the userDirectory for Node-RED.
-      * to see all the possible options for the Docker run command use ```docker run --help```
+    !!! info
+        * the **-e** option is short for **--env** and sets the **NODE_RED_ENABLE_PROJECTS** environment variable
+        * the **-v** option is short for **--volume** and maps your local **NRdata** directory into the container at location **/data**, which is configured as the userDirectory for Node-RED.
+        * to see all the possible options for the Docker run command use ```docker run --help```
 
 ### Step 3. Using Source control in Node-RED
 
@@ -120,26 +130,35 @@ For this tutorial the Node-RED user directory is the NRdata directory you create
 
 1. Open a browser to access your local Node-RED runtime on [http://localhost:1880](http://localhost:1880) and you should see the Projects wizard, as projects are enabled and no projects exist yet:  
   ![project wizard](image/projectWizard.png){style="width: 50%" .center}
+
 2. Select the Clone Repository.
     * Enter your name and email, to be used when committing content.
     * copy the Git repo URL from **your** git repo github page (the URL should contain your github user name):  
       ![github page](image/copyGitURL.png){style="width: 50%" .center}
     * Back in the Node-RED editor window, paste the github URL into the **Git repository URL** field.
     * Enter your git credentials for the Username and Password fields (use the Personal Access Token as the password if you have one set on your github account - your github account password will not work if a personal access token is defined) then press the **Clone project** button when all the details have been completed - leave the Credentials encryption key field blank  
-      ![Clone repo](image/cloneRepo.png){style="width: 50%" .center}  
-      *Note: Leaving the **credentials encryption key** field blank means that any credentials entered in any node configuration will be checked into git unencrypted.  For this tutorial this isn't an issue as we want to go look at the credentials.  For your own projects you may want to enter an encryption key, unless you plan to provide all credentials at run time and want to inspect the credentials file to verify there are no captured credentials.*
+      ![Clone repo](image/cloneRepo.png){style="width: 50%" .center} 
+
+        !!! info
+              Leaving the **credentials encryption key** field blank means that any credentials entered in any node configuration will be checked into git unencrypted.  For this tutorial this isn't an issue as we want to go look at the credentials.  For your own projects you may want to enter an encryption key, unless you plan to provide all credentials at run time and want to inspect the credentials file to verify there are no captured credentials.
+
 3. Drag an inject and debug node onto the sheet and connect them to create a basic flow then deploy the changes  
   ![basic flow](image/basicFlow.png){style="width: 50%" .center}
+
 4. Switch to the project history section in the side panel, where you can see the flows.json file has uncommitted local changes.  Move your mouse over the entry and press the **+** button to stage the change  
     ![stage change](image/gitStage.png){style="width: 35%" .center}
+
 5. The flows.json file is now ready to be committed.  Press the commit button then enter a commit message **basic flow** to commit the flow change  
   ![commit](image/gitCommit.png){style="width: 35%" .center}
+
 6. Switch to the **Commit History** section of the project side panel.  Here you can see the last commit and also that the local git branch is 1 commit ahead of the remote master.  Click the up arrow to open the Manage remote branch panel  
   ![commit history](image/commitHistory.png){style="width: 35%" .center}
+
 7. Press the **Push** button to send the commit to the remote branch  
   ![git push](image/gitPush.png){style="width: 35%" .center}
 
-**Note**: There is an issue when running on Windows 10 - the git push is not always passing the git credentials correctly.  If this is the case you can issue a `git push` command from a command window.  Change to the active git project directory : \\[*user home directory*]\\NRdata\\projects\\[*repo name*] then issue the git push command.
+    !!! note
+        There is an issue when running on Windows 10 - the git push is not always passing the git credentials correctly.  If this is the case you can issue a `git push` command from a command window.  Change to the active git project directory : \\[*user home directory*]\\NRdata\\projects\\[*repo name*] then issue the git push command.
 
 ### Step 4. Pulling changes and handling merge conflicts
 
@@ -150,25 +169,37 @@ It is recommended that team members use different tabs in the Node-RED editor wh
 Follow the instructions below to cause a merge conflict then resolve it.
 
 1. In the [GitHub web UI](https://github.com) open your forked project then open the flows.json page
+
 2. Select the pencil icon to start editing the file  
     ![Edit flow](image/editFlowGitHub.png)
+
 3. Find the x and y coordinates of the inject node and modify them, add or remove 10 to each of the values for x and y  
     ![Update node location](image/updateNodeLocation.png)
+
 4. Press the **Commit changes** to save the change and commit the change to the master branch of the GitHub repo.  
     ![Commit location change](image/commitLocationChange.png)
+
 5. Back in the Node-RED editor move the inject node to a new location, then press the **Deploy** button to make the change live.
+
 6. Open the git section of the side panel then stage and commit the update to the flow.
+
 7. Open up the Commit History section and refresh the panel.  You will now see 1 change to push and 1 change to pull.  
     ![incoming change](image/incomingChange.png){style="width: 35%" .center}
+
 8. Clicking to manage the remote branch you will see the pull button enabled, select the pull button to bring in the change you made directly in GitHub  
     ![pull remote changes](image/pullChanges.png){style="width: 35%" .center}
+
 9. You should get a notification that automatic merging failed - which is expected as the GitHub change and your local change in the Node-RED editor made different changes to the same node.  Select the **Show merge conflicts** button in the notification window  
     ![auto merge failed](image/autoMergeFailed.png){style="width: 35%" .center}
+
 10. There is now a new section in the git panel - **Unmerged changes**.  Click the flow.json file to open the resolve conflicts window, highlighting where the conflicts are.  
     ![unmerged changes](image/unmergedChanges.png){style="width: 35%" .center}
+
 11. Expand the twisties until you can see the conflicting positions for the inject node.  You will also notice a radio button allowing you to select which version of the conflicting changes you want to accept.  
     ![resolve merge conflicts](image/resolveConflict.png)
+
 12. Select one of the versions by clicking the radio button.  The version which will be saved is highlighted in green and the version that will be overwritten is highlighted in red.  When all conflicts have been resolved click the **Save conflict resolution** button.
+
 13. There is a new change to commit - this is the merge resolution commit.  Commit the change then navigate to the Commit History section of the Git side panel.  Here you will see there are no incoming changes, but there are 2 outgoing changes.  The original committed change and the merge resolution change.  Select **Manage remote branch** then push the changes.  
     ![push conflict resolution](image/pushConflictResolution.png){style="width: 35%" .center}
 

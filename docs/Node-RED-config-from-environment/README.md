@@ -142,7 +142,8 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
     ```docker run -itd -p 8883:8883 -v /Users/brian/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mqttBroker eclipse-mosquitto```
 
-    *Note:* The -p option is passed here to export port 8883.  This exposes the MQTT broker port 8883 as if it were installed directly onto your laptop or workstation.  If you only want the services of the MQTT broker to be available to other containers connected to the NRbridge network, then you can omit the -p 8883:8883 from the command line.
+    !!! info
+        The -p option is passed here to export port 8883.  This exposes the MQTT broker port 8883 as if it were installed directly onto your laptop or workstation.  If you only want the services of the MQTT broker to be available to other containers connected to the NRbridge network, then you can omit the -p 8883:8883 from the command line.
 
 4. (OPTIONAL) If you want to create additional broker users in the container.  There is already a default user created, the username is **mosquitto** with password **passw0rd**:
 

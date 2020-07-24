@@ -84,7 +84,8 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
 
     * press the **Deploy** button to make the new nodes live (you can now access the new endpoint running on your local Node-RED instance [http://localhost:1880/hello](http://localhost:1880/hello).
 
-        *Note: This web endpoint generates a JSON response.  Most browsers can display JSON content, but not all can without having a plugin installed.   If you get prompted to install a plugin you can choose to install one, or just take the request as validating that the endpoint worked*
+        !!! note
+            This web endpoint generates a JSON response.  Most browsers can display JSON content, but not all can without having a plugin installed.   If you get prompted to install a plugin you can choose to install one, or just take the request as validating that the endpoint worked*
 
 3. Commit and push the change to git
     * switch to the git side panel
@@ -138,7 +139,10 @@ In this tutorial we will use the new **buildx** feature of Docker.  At the time 
 
     `docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t YOUR-DOCKER-USERNAME/node-red-docker-sample --push .`
 
-    replace **YOUR-DOCKER-USERNAME** with your docker username.  Here you see we are asking to build an image for 3 different architectures.  AMD/Intel 64 bit, ARM 64bit and ARM 32bit v7 (Raspberry Pi 3/4).  You can change to list of architectures to build as needed, e.g. adding additional architectures, such as **linux/s390x** to add support for IBM Z systems or **linux/ppc64le** for IBM POWER systems.  Note the more architectures you select to build, the longer the build takes.  The list of architectures your build environment supports is provided in the output to the ```docker buildx ls`` command.
+    replace **YOUR-DOCKER-USERNAME** with your docker username.  Here you see we are asking to build an image for 3 different architectures.  AMD/Intel 64 bit, ARM 64bit and ARM 32bit v7 (Raspberry Pi 3/4).  You can change to list of architectures to build as needed, e.g. adding additional architectures, such as **linux/s390x** to add support for IBM Z systems or **linux/ppc64le** for IBM POWER systems.  
+
+    !!! warning
+        the more architectures you select to build, the longer the build takes.  The list of architectures your build environment supports is provided in the output to the ```docker buildx ls`` command.
 
     * the **-t** option is short for **--tag** which applies a tag to the container image in the registry
     * to see all the options available when building an image use command ```docker buildx build --help```
