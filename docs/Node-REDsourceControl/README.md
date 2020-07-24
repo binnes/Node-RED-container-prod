@@ -66,7 +66,7 @@ Follow the instructions to fork the starter git repository, which is contains a 
 2. Make sure you are logged into your github account then press the **Fork** button so you have your own copy of the repo ![Fork](image/forkRepo.png)
 3. (OPTIONAL) If you have 2-factor authentication enabled on your github account, then you need to use a Personal Access Token when using the git command line tools.  To create a Personal Access Token:
     * Open the git settings  
-  ![settings](image/gitSettings.png){style="width: 25%" .center}
+  ![settings](image/gitSettings.png){style="width: 20%" .center}
     * select **Developer settings** then **Personal access tokens** then **Generate new token**.
     * Give the token a use, select all scopes except `admin:enterprise` and `admin:gpg.key` scope then **Generate token** ![generate token](image/gitPAT.png) - record the token as you will need it later in the tutorial.
 
