@@ -1,0 +1,500 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="How to integrate Low Code development into a production development pipeline" name="description"/>
+<link href="https://binnes.github.io/Node-RED-container-prod/Packaging-Node-RED-apps-in-containers/index.html" rel="canonical"/>
+<meta content="Brian Innes" name="author"/>
+<link href="../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<title>Packaging Applications - Low Code Development for Production</title>
+<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+<link href="../css/extra.css" rel="stylesheet"/>
+<link href="../css/pdf-print.css" rel="stylesheet"/>
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-172132667-1","binnes.github.io/Node-RED-container-prod/"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+</head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#packaging-node-red-apps-in-containers">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header-nav md-grid">
+<a aria-label="Low Code Development for Production" class="md-header-nav__button md-logo" href="https://binnes.github.io/Node-RED-container-prod/" title="Low Code Development for Production">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header-nav__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header-nav__title" data-md-component="header-title">
+<div class="md-header-nav__ellipsis">
+<span class="md-header-nav__topic md-ellipsis">
+            Low Code Development for Production
+          </span>
+<span class="md-header-nav__topic md-ellipsis">
+            
+              Packaging Applications
+            
+          </span>
+</div>
+</div>
+<label class="md-header-nav__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header-nav__source">
+<a class="md-source" href="https://github.com/binnes/Node-RED-container-prod/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    binnes/Node-RED-container-prod
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Low Code Development for Production" class="md-nav__button md-logo" href="https://binnes.github.io/Node-RED-container-prod/" title="Low Code Development for Production">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    Low Code Development for Production
+  </label>
+<div class="md-nav__source">
+<a class="md-source" href="https://github.com/binnes/Node-RED-container-prod/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    binnes/Node-RED-container-prod
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html" title="Home">
+      Home
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Node-REDsourceControl/index.html" title="Source Control">
+      Source Control
+    </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        Packaging Applications
+        <span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"></path></svg>
+</span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="index.html" title="Packaging Applications">
+      Packaging Applications
+    </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-objectives">
+    Learning objectives
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prerequisites">
+    Prerequisites
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#estimated-time">
+    Estimated time
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#steps">
+    Steps
+  </a>
+<nav aria-label="Steps" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-1-dependencies">
+    Step 1. Dependencies
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-2-extend-the-application">
+    Step 2. Extend the application
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-3-configure-the-builder-and-build-the-application">
+    Step 3. Configure the builder and build the application
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+    Summary
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Node-RED-config-from-environment/index.html" title="Config from Environment">
+      Config from Environment
+    </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-objectives">
+    Learning objectives
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prerequisites">
+    Prerequisites
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#estimated-time">
+    Estimated time
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#steps">
+    Steps
+  </a>
+<nav aria-label="Steps" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-1-dependencies">
+    Step 1. Dependencies
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-2-extend-the-application">
+    Step 2. Extend the application
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-3-configure-the-builder-and-build-the-application">
+    Step 3. Configure the builder and build the application
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+    Summary
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/binnes/Node-RED-container-prod/edit/master/docs/Packaging-Node-RED-apps-in-containers/README.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="packaging-node-red-apps-in-containers">Packaging Node-RED apps in containers<a class="headerlink" href="#packaging-node-red-apps-in-containers" title="Permanent link">¶</a></h1>
+<p>In this tutorial you will learn how to package a Node-RED application into a container and customise the runtime for production running rather than application creation</p>
+<h2 id="learning-objectives">Learning objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">¶</a></h2>
+<p>In this tutorial, you will learn how to:</p>
+<ul>
+<li>Identify the dependencies for a Node-RED application</li>
+<li>Customise the Node-RED runtime for production use</li>
+<li>Build a multi-architecture container for a Node-RED application and push it to a container registry</li>
+<li>Run a containerised Node-RED application</li>
+</ul>
+<p>The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.</p>
+<p><a href="https://youtu.be/0fwzo4IPaHs" title="Demonstration of instructor completing this tutorial"><img alt='"Demonstration of instructor completing this tutorial"' src="http://img.youtube.com/vi/0fwzo4IPaHs/0.jpg"/></a></p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<p>To complete this tutorial, you need:</p>
+<ul>
+<li>some experience of using Node-RED</li>
+<li>a laptop/workstation running an up to date version of Linux, Mac OS or Windows</li>
+<li>an up to date version of <a href="https://www.docker.com">Docker</a> on your laptop/workstation (version 19.03 or higher should be returned by the <code>docker version</code> command)</li>
+<li>An active <a href="https://www.docker.com">Docker ID</a> to be able to sign into <a href="https://hub.docker.com">dockerhub</a></li>
+<li>a <a href="https://github.com">github</a> account</li>
+<li><a href="https://git-scm.com/downloads">git tools</a> installed on your laptop/workstation</li>
+<li>Completed tutorial <strong>Version Control with Node-RED</strong> and have the forked template repository in your github account, which is also cloned within a Node-RED project on your laptop/workstation</li>
+</ul>
+<h2 id="estimated-time">Estimated time<a class="headerlink" href="#estimated-time" title="Permanent link">¶</a></h2>
+<p>You can complete this tutorial in less than 20 minutes.</p>
+<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">¶</a></h2>
+<ol>
+<li><a href="#step-1-dependencies">Dependencies</a></li>
+<li><a href="#step-2-extend-the-application">Extend application</a></li>
+<li><a href="#step-3-configure-the-builder-and-build-the-application">Build the application</a></li>
+</ol>
+<h3 id="step-1-dependencies">Step 1. Dependencies<a class="headerlink" href="#step-1-dependencies" title="Permanent link">¶</a></h3>
+<p>Containers are becoming the standard way to package, distribute and deploy applications for modern cloud based environments.  Increasingly containers are also being used to distribute and manage workloads in edge of network scenarios.</p>
+<p>X86_64 is the predominant CPU architecture in use today in public cloud, but there are also Open Power and S390 systems being used in infrastructures running many large businesses.  At the edge there are also ARM32 and ARM64 systems, so in this tutorial you will build a multi-architecture container, allowing your containers to run on multiple different architectures.</p>
+<p>The 12-factor app <a href="https://12factor.net/dependencies">dependency rule</a> is to <em>Explicitly declare and isolate dependencies</em></p>
+<p>For a Node-RED application all dependencies are specified in the package.json file.  When adding additional nodes to the Node-RED pallet, ensure they are added to the package.json.</p>
+<p>However, there are still '<em>hidden</em>' dependencies that can creep into a project when a package has some native dependencies that need to be installed in the host system running the application.</p>
+<p>To get round this the starter project has a Dockerfile which will build the application from the source code and package it into a container.  The Dockerfile captures all <em>hidden</em> dependencies.</p>
+<p>The provided Dockerfile in the starter project initially creates a build container to build the required software, then creates an applications image, copying built content from the build container.  This way a fully defined build environment is created and used, but the build tooling is not part of the production container image.</p>
+<p>The runtime files in the starter project have been modified to allow the application to be better managed in the cloud.  Additional endpoints (<em>/live, /ready and /health</em>) have been added to allow a cloud environment to verify the state of the running container.  The editor has also been moved to the <strong>/admin</strong> endpoint.  In a production environment the editor should be disabled, but for this tutorial it has been left active to allow you to examine the Node-RED runtime running in the container.</p>
+<p>In this tutorial the new <strong>buildx</strong> Docker feature is used to make it easier to create and push multi-architecture containers.</p>
+<h3 id="step-2-extend-the-application">Step 2. Extend the application<a class="headerlink" href="#step-2-extend-the-application" title="Permanent link">¶</a></h3>
+<p>Before building the app we will add another few nodes to add a Web endpoint, so we can test an app when we have Node-RED deployed in Docker.</p>
+<ol>
+<li>Start Node-RED, if not already running:<ul>
+<li>run <code>docker ps -a</code> to see what is running</li>
+<li>if <strong>mynodered</strong> container instance exists, but is not in state <strong>up</strong>, then run command <code>docker start mynodered</code></li>
+<li>if <strong>mynodered</strong> container instance does not exist then run the appropriate command (replacing <em>YOUR-USERNAME</em> with your own username):</li>
+<li><strong>Windows</strong>:<br/>
+<code>docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red</code></li>
+<li><strong>Mac OS</strong>:<br/>
+<code>docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red</code></li>
+<li><strong>Linux</strong>:<br/>
+<code>docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red</code></li>
+</ul>
+</li>
+<li>
+<p>Import the following JSON to add the <strong>/hello</strong> endpoint:</p>
+<ul>
+<li>to import the flow select the main menu (☰), then the import option from the menu
+    <img alt="main menu" class="center" src="image/mainMenu.png" style="width: 35%"/></li>
+<li>copy and paste the JSON below into the Import nodes window, then press the <strong>Import</strong> button to import the nodes
+    <img alt="import nodes" src="image/importNodes.png"/></li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="p">[{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"55dd0376.f7c64c"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"http in"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"url"</span><span class="p">:</span><span class="s2">"/hello"</span><span class="p">,</span><span class="nt">"method"</span><span class="p">:</span><span class="s2">"get"</span><span class="p">,</span><span class="nt">"upload"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">"swaggerDoc"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">130</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">420</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[[</span><span class="s2">"c656aba7.944288"</span><span class="p">]]},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"c2380ca8.0463"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"http response"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"statusCode"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"headers"</span><span class="p">:{},</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">470</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">420</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[]},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"c656aba7.944288"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"change"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"rules"</span><span class="p">:[{</span><span class="nt">"t"</span><span class="p">:</span><span class="s2">"set"</span><span class="p">,</span><span class="nt">"p"</span><span class="p">:</span><span class="s2">"payload"</span><span class="p">,</span><span class="nt">"pt"</span><span class="p">:</span><span class="s2">"msg"</span><span class="p">,</span><span class="nt">"to"</span><span class="p">:</span><span class="s2">"{\"text\":\"Hello\"}"</span><span class="p">,</span><span class="nt">"tot"</span><span class="p">:</span><span class="s2">"json"</span><span class="p">}],</span><span class="nt">"action"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"property"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"from"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"to"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"reg"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">300</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">420</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[[</span><span class="s2">"c2380ca8.0463"</span><span class="p">]]}]</span>
+</code></pre></div>
+<ul>
+<li>
+<p>press the <strong>Deploy</strong> button to make the new nodes live (you can now access the new endpoint running on your local Node-RED instance <a href="http://localhost:1880/hello">http://localhost:1880/hello</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This web endpoint generates a JSON response.  Most browsers can display JSON content, but not all can without having a plugin installed.   If you get prompted to install a plugin you can choose to install one, or just take the request as validating that the endpoint worked*</p>
+</div>
+</li>
+</ul>
+</li>
+<li>
+<p>Commit and push the change to git</p>
+<ul>
+<li>switch to the git side panel</li>
+<li>stage the change to the flows.json</li>
+<li>commit the change</li>
+<li>switch to the Commit History section of the side panel</li>
+<li>click the up arrow to open the Manage remote branch popup</li>
+<li>push the change to the server</li>
+</ul>
+</li>
+</ol>
+<h3 id="step-3-configure-the-builder-and-build-the-application">Step 3. Configure the builder and build the application<a class="headerlink" href="#step-3-configure-the-builder-and-build-the-application" title="Permanent link">¶</a></h3>
+<p>In this tutorial we will use the new <strong>buildx</strong> feature of Docker.  At the time of writing this content it is an experimental feature in Docker, so experimental features need to be enabled in Docker to get access to buildx:</p>
+<ol>
+<li>
+<p>Enable buildx in Docker:</p>
+<ul>
+<li>Linux</li>
+<li>
+<p>Environment variable <strong>DOCKER_CLI_EXPERIMENTAL</strong> should be set to <strong>enabled</strong></p>
+<p>This can be done on the command line, or added to your .profile or active config file sourced when a new login shell is launched:</p>
+<p><code>export DOCKER_CLI_EXPERIMENTAL=enabled</code></p>
+</li>
+<li>
+<p>To build multi-architecture images on Linux, architecture emulation needs to be added to Linux.  This can be done by running the following command:</p>
+<p><code>docker run --rm --privileged docker/binfmt:66f9012c56a8316f9244ffd7622d7c21c1f6f28d</code></p>
+</li>
+<li>
+<p>MacOS and Windows</p>
+</li>
+<li>Start Docker if it is not running</li>
+<li>Click the Docker icon (usually in bottom notification popup on Windows, top menu bar on MacOS) and select <strong>settings</strong> or <strong>Preferences</strong> then the <strong>Command Line</strong> section</li>
+<li>Enable Experimental features</li>
+<li>Open a command or terminal window then navigate to the project directory:</li>
+<li>navigate to your home directory</li>
+<li>navigate to the <strong>NRdata/projects/Node-RED-Docker</strong> subdirectory within your home directory. This directory should contain the Dockerfile.  </li>
+<li>Before you can build a container you need to create a new builder.  Enter the command:</li>
+</ul>
+<p><code>docker buildx create --name NRbuilder --use</code></p>
+</li>
+<li>
+<p>Inspect the builder with command :</p>
+<p><code>docker buildx inspect --bootstrap</code></p>
+<p>which will also start the builder if it is not running.  The output of this command will show the target architectures supported by the builder.
+5. You can check you have a builder running using the <strong>ls</strong> command, which also outputs the list of supported architectures :</p>
+<p><code>docker buildx ls</code></p>
+</li>
+<li>
+<p>Now the builder is up and running you can build a multi-arch container and push it to your dockerhub account.  First ensure you are logged into dockerhub :</p>
+<p><code>docker login</code></p>
+</li>
+<li>
+<p>Build and push the image :</p>
+<p><code>docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t YOUR-DOCKER-USERNAME/node-red-docker-sample --push .</code></p>
+<p>replace <strong>YOUR-DOCKER-USERNAME</strong> with your docker username.  Here you see we are asking to build an image for 3 different architectures.  AMD/Intel 64 bit, ARM 64bit and ARM 32bit v7 (Raspberry Pi 3/4).  You can change to list of architectures to build as needed, e.g. adding additional architectures, such as <strong>linux/s390x</strong> to add support for IBM Z systems or <strong>linux/ppc64le</strong> for IBM POWER systems.  </p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>the more architectures you select to build, the longer the build takes.  The list of architectures your build environment supports is provided in the output to the <code>`docker buildx ls</code> command.</p>
+</div>
+<ul>
+<li>the <strong>-t</strong> option is short for <strong>--tag</strong> which applies a tag to the container image in the registry</li>
+<li>to see all the options available when building an image use command <code>docker buildx build --help</code></li>
+</ul>
+</li>
+<li>
+<p>Inspect the image using command (replace <strong>YOUR-DOCKER-USERNAME</strong> with your docker username):</p>
+<p><code>docker buildx imagetools inspect docker.io/YOUR-DOCKER-USERNAME/node-red-docker-sample:latest</code></p>
+</li>
+<li>
+<p>Stop your local Node-RED</p>
+<p><em>(we want to test the new container and will use the same Node-RED port of 1880, so can't have 2 applications listening on the same port)</em>:</p>
+<p><code>docker stop mynodered</code></p>
+<p>in a command line window,  start your new container using command :</p>
+<p><code>docker run -dit -p 1880:1880 --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest</code></p>
+</li>
+<li>
+<p>Test your container.  </p>
+<ul>
+<li>You will not be able to launch at the Editor on the base URL, as this has been modified in the sample project <strong>settings.js</strong> file.  The editor can be launched at <a href="http://localhost:1880/admin"><strong>/admin</strong></a>.  In a production Node-RED container you should not be able to alter the application, so the editor needs to be disabled.  This can be achieved by setting the <strong>httpAdminRoot</strong> property in the <strong>settings.js</strong> file to <strong>false</strong>.  Details of the Node-RED configuration options can be found in the <a href="https://nodered.org/docs/user-guide/runtime/configuration">Node-RED documentation</a>.  </li>
+<li>You should be able to access the <a href="http://localhost:1880/hello">/hello</a> endpoint</li>
+</ul>
+</li>
+<li>If you have a Raspberry Pi or other ARM 32-bit or ARM 64-bit system you can also test that the ARM containers also work.</li>
+</ol>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<p>In this tutorial you:</p>
+<ul>
+<li>Enabled experimental features in Docker to access the buildx command</li>
+<li>Created a new builder instance</li>
+<li>Created a multi-architecture set of containers and pushed them to dockerhub</li>
+<li>Inspected the created images</li>
+<li>Ran the newly created container on your local machine and optionally on a system with a different CPU architecture</li>
+</ul>
+<p>Now you can create a Docker image containing your Node-RED application, but to make the container suitable for running in a cloud environment there is a further consideration needed to allow the cloud environment to provide configuration at runtime to the container, which is the subject of the <a href="../Node-RED-config-from-environment/index.html">next tutorial</a>.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav aria-label="Footer" class="md-footer-nav__inner md-grid">
+<a class="md-footer-nav__link md-footer-nav__link--prev" href="../Node-REDsourceControl/index.html" rel="prev" title="Source Control">
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Source Control
+              </div>
+</div>
+</a>
+<a class="md-footer-nav__link md-footer-nav__link--next" href="../Node-RED-config-from-environment/index.html" rel="next" title="Config from Environment">
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Config from Environment
+              </div>
+</div>
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"></path></svg>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+ ... <a download href="../pdf/lowCodeDev.pdf" title="PDF">download PDF</a></div>
+</div>
+</div>
+</footer>
+</div>
+<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
+<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+</body>
+</html>

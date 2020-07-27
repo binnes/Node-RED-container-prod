@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
+     <loc>https://binnes.github.io/Node-RED-container-prod/index.html</loc>
+     <lastmod>2020-07-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://binnes.github.io/Node-RED-container-prod/Node-REDsourceControl/index.html</loc>
+     <lastmod>2020-07-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://binnes.github.io/Node-RED-container-prod/Packaging-Node-RED-apps-in-containers/index.html</loc>
+     <lastmod>2020-07-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://binnes.github.io/Node-RED-container-prod/Node-RED-config-from-environment/index.html</loc>
+     <lastmod>2020-07-27</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+</urlset>

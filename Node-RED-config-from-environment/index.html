@@ -1,0 +1,680 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="How to integrate Low Code development into a production development pipeline" name="description"/>
+<link href="https://binnes.github.io/Node-RED-container-prod/Node-RED-config-from-environment/index.html" rel="canonical"/>
+<meta content="Brian Innes" name="author"/>
+<link href="../assets/images/favicon.png" rel="shortcut icon"/>
+<meta content="mkdocs-1.1.2, mkdocs-material-5.5.0" name="generator"/>
+<title>Config from Environment - Low Code Development for Production</title>
+<link href="../assets/stylesheets/main.b5d04df8.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&amp;display=fallback" rel="stylesheet"/>
+<style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+<link href="../css/extra.css" rel="stylesheet"/>
+<link href="../css/pdf-print.css" rel="stylesheet"/>
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-172132667-1","binnes.github.io/Node-RED-container-prod/"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async="" src="https://www.google-analytics.com/analytics.js"></script>
+</head>
+<body dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#node-red-configuration-from-environment">
+          Skip to content
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="Header" class="md-header-nav md-grid">
+<a aria-label="Low Code Development for Production" class="md-header-nav__button md-logo" href="https://binnes.github.io/Node-RED-container-prod/" title="Low Code Development for Production">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+<label class="md-header-nav__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"></path></svg>
+</label>
+<div class="md-header-nav__title" data-md-component="header-title">
+<div class="md-header-nav__ellipsis">
+<span class="md-header-nav__topic md-ellipsis">
+            Low Code Development for Production
+          </span>
+<span class="md-header-nav__topic md-ellipsis">
+            
+              Config from Environment
+            
+          </span>
+</div>
+</div>
+<label class="md-header-nav__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="Search" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" data-md-state="active" name="query" placeholder="Search" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</label>
+<button aria-label="Clear" class="md-search__icon md-icon" data-md-component="search-reset" tabindex="-1" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"></path></svg>
+</button>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            Initializing search
+          </div>
+<ol class="md-search-result__list"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header-nav__source">
+<a class="md-source" href="https://github.com/binnes/Node-RED-container-prod/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    binnes/Node-RED-container-prod
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Navigation" class="md-nav md-nav--primary" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="Low Code Development for Production" class="md-nav__button md-logo" href="https://binnes.github.io/Node-RED-container-prod/" title="Low Code Development for Production">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"></path></svg>
+</a>
+    Low Code Development for Production
+  </label>
+<div class="md-nav__source">
+<a class="md-source" href="https://github.com/binnes/Node-RED-container-prod/" title="Go to repository">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 448 512" xmlns="http://www.w3.org/2000/svg"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"></path></svg>
+</div>
+<div class="md-source__repository">
+    binnes/Node-RED-container-prod
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../index.html" title="Home">
+      Home
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Node-REDsourceControl/index.html" title="Source Control">
+      Source Control
+    </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../Packaging-Node-RED-apps-in-containers/index.html" title="Packaging Applications">
+      Packaging Applications
+    </a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" data-md-toggle="toc" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+        Config from Environment
+        <span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 9h14V7H3v2m0 4h14v-2H3v2m0 4h14v-2H3v2m16 0h2v-2h-2v2m0-10v2h2V7h-2m0 6h2v-2h-2v2z"></path></svg>
+</span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="index.html" title="Config from Environment">
+      Config from Environment
+    </a>
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-objectives">
+    Learning objectives
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prerequisites">
+    Prerequisites
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#estimated-time">
+    Estimated time
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#steps">
+    Steps
+  </a>
+<nav aria-label="Steps" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-1-environment-variables">
+    Step 1. Environment Variables
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-2-run-a-local-broker">
+    Step 2. Run a local broker
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-3-mqtt-node-config">
+    Step 3. MQTT node config
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-4-removing-static-config-from-nodes">
+    Step 4. Removing static config from nodes
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-5-testing-the-environment-variable-substitution">
+    Step 5. Testing the environment variable substitution
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-6-updating-docker-container-in-dockerhub">
+    Step 6. Updating Docker container in dockerhub
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+    Summary
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="Table of contents" class="md-nav md-nav--secondary">
+<label class="md-nav__title" for="__toc">
+<span class="md-nav__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</span>
+      Table of contents
+    </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#learning-objectives">
+    Learning objectives
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#prerequisites">
+    Prerequisites
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#estimated-time">
+    Estimated time
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#steps">
+    Steps
+  </a>
+<nav aria-label="Steps" class="md-nav">
+<ul class="md-nav__list">
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-1-environment-variables">
+    Step 1. Environment Variables
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-2-run-a-local-broker">
+    Step 2. Run a local broker
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-3-mqtt-node-config">
+    Step 3. MQTT node config
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-4-removing-static-config-from-nodes">
+    Step 4. Removing static config from nodes
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-5-testing-the-environment-variable-substitution">
+    Step 5. Testing the environment variable substitution
+  </a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#step-6-updating-docker-container-in-dockerhub">
+    Step 6. Updating Docker container in dockerhub
+  </a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="#summary">
+    Summary
+  </a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-content">
+<article class="md-content__inner md-typeset">
+<a class="md-content__button md-icon" href="https://github.com/binnes/Node-RED-container-prod/edit/master/docs/Node-RED-config-from-environment/README.md" title="Edit this page">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"></path></svg>
+</a>
+<h1 id="node-red-configuration-from-environment">Node-RED configuration from environment<a class="headerlink" href="#node-red-configuration-from-environment" title="Permanent link">¶</a></h1>
+<p>In this tutorial you will learn how to create Node-RED applications able to receive their configuration from the environment at runtime</p>
+<h2 id="learning-objectives">Learning objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">¶</a></h2>
+<p>In this tutorial, you will learn how to:</p>
+<ul>
+<li>get configuration for nodes from the environment</li>
+<li>access environment variables within a flow</li>
+<li>set environment variables when running a Docker container</li>
+<li>enable containers to communicate using a Docker user-defined bridge</li>
+</ul>
+<p>The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.</p>
+<p><a href="https://youtu.be/apKR3UhacWI" title="Demonstration of instructor completing this tutorial"><img alt='"Demonstration of instructor completing this tutorial"' src="http://img.youtube.com/vi/apKR3UhacWI/0.jpg"/></a></p>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">¶</a></h2>
+<p>To complete this tutorial, you need:</p>
+<ul>
+<li>some experience of using Node-RED</li>
+<li>a laptop/workstation running an up to date version of Linux, Mac OS or Windows</li>
+<li>an up to date version of <a href="https://www.docker.com">Docker</a> on your laptop/workstation (version 19.03 or higher should be returned by the <code>docker version</code> command)</li>
+<li>a <a href="https://github.com">github</a> account</li>
+<li><a href="https://git-scm.com/downloads">git tools</a> installed on your laptop/workstation</li>
+<li>Completed tutorial <strong>Package a Node-RED application in a container</strong> and have the forked template repository in your github account, which is also cloned within a Node-RED project on your laptop/workstation</li>
+</ul>
+<h2 id="estimated-time">Estimated time<a class="headerlink" href="#estimated-time" title="Permanent link">¶</a></h2>
+<p>You can complete this tutorial in less than 20 minutes.</p>
+<h2 id="steps">Steps<a class="headerlink" href="#steps" title="Permanent link">¶</a></h2>
+<ol>
+<li><a href="#step-1-environment-variables">Environment Variables</a></li>
+<li><a href="#step-2-run-a-local-broker">Run a local broker</a></li>
+<li><a href="#step-3-mqtt-node-config">MQTT node config</a></li>
+<li><a href="#step-4-removing-static-config-from-nodes">Removing static config from nodes</a></li>
+<li><a href="#step-5-testing-the-environment-variable-substitution">Testing the environment variable substitution</a></li>
+<li><a href="#step-6-updating-docker-container-in-dockerhub">Updating Docker container in dockerhub</a></li>
+</ol>
+<p>Having configuration embedded in a container means that container is restricted to a single environment.  If a container application needs to connect to external services, such as a database or messaging service then allowing the configuration details for the external services to be provided at runtime makes the container much more useful, as it doesn't need to be rebuilt every time configuration changes.</p>
+<p>The 12-factor app <a href="https://12factor.net/config">Config</a> rule requires that config is stored in the environment.</p>
+<p>Cloud runtime environments pass configuration to applications through a number of different mechanisms.  Setting environment variables is a common approach.</p>
+<p>In Node-RED static configuration is usually found within the configuration properties of the nodes.  In the previous tutorial, when you enabled projects within the Node-RED editor you disabled configuration encryption, so it is easy to see the configuration, including the password configuration in the flows_cred.json file in the project directory.</p>
+<h3 id="step-1-environment-variables">Step 1. Environment Variables<a class="headerlink" href="#step-1-environment-variables" title="Permanent link">¶</a></h3>
+<p>A number of nodes have the ability to access environment variables from their configuration, e.g. Inject node, Change node and Switch node.</p>
+<p>It is also possible get a node configuration property to be replaced by an environment variable when the flow is loaded by using syntax <strong>${ENV_VAR}</strong> in any string based configuration property.</p>
+<p>To set an environment variable named <strong>WWW</strong> in a command window:</p>
+<ul>
+<li>Linux and MacOS : <code>export WWW=123</code></li>
+<li>Windows : <code>set WWW=123</code></li>
+</ul>
+<p>This sets the environment variable only for the current terminal or command window session.  There are ways on the different operating systems to set environment variables, so they are always set.</p>
+<p>To see all environment variable that are set, simply enter command <code>set</code> on Linux, MacOS and Windows and you will see all the environment variables that are set.</p>
+<p>Environment variables from the host are not automatically passed into a docker container.  You need to use the -e command line option to set an environment variable as part of the command line.  You can either provide a value for the environment variable on the command line or pass in the value from the local environment:</p>
+<ul>
+<li><code>docker run -e WWW=987 ...</code> : will set the value 987 for environment variable <strong>WWW</strong> inside the container instance</li>
+<li><code>docker run -e WWW ...</code> : will set the value for <strong>WWW</strong> from the local environment when the docker run command is executed.  If the <strong>WWW</strong> was set as above then the value in the container instance would be 123.  If there is no local environment variable set for <strong>WWW</strong> then the variable will not be set in the container</li>
+</ul>
+<p>You can also use the <strong>--env-file</strong> option to read environment variables from a file:</p>
+<p><code>docker run --env-file env.list ...</code></p>
+<p>with file <strong>env.list</strong> containing</p>
+<div class="highlight"><pre><span></span><code># This line is a comment line
+VAR1=abc
+WWW
+</code></pre></div>
+<p>the <strong>VAR1</strong> environment variable would be set to <em>abc</em> and <strong>WWW</strong> would be set to the value of the local environment variable <strong>WWW</strong> when the docker command was run.</p>
+<ol>
+<li>
+<p>Stop any running Node-RED instances, then start Node-RED setting the WWW environment variable (If you have the Docker container from the previous tutorial still running then you need to stop that):</p>
+<ul>
+<li><code>docker stop dockerNR</code></li>
+<li><code>docker rm dockerNR</code></li>
+<li><code>docker stop mynodered</code></li>
+<li><code>docker rm mynodered</code></li>
+<li>choose the appropriate command for your operating system (replacing <em>YOUR-USERNAME</em> with your own username):</li>
+<li>
+<p><strong>Windows</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red</code></p>
+</li>
+<li>
+<p><strong>Mac OS</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red</code></p>
+</li>
+<li>
+<p><strong>Linux</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -e WWW=123 --name mynodered nodered/node-red</code></p>
+</li>
+</ul>
+</li>
+<li>
+<p>Modify the inject node you added in the <strong>Node-RED with source control</strong> tutorial to set the payload to the value of the <strong>WWW</strong> environment variable</p>
+<p><img alt="inject env var" class="center" src="image/injectEnv.png" style="width: 50%"/></p>
+<p>Deploy the change then test the outcome by pressing the button on the Inject node to send a message.  Switch to the debug tab to see the outcome</p>
+<p><img alt="Test environment variables" src="image/testEnvVar.png"/></p>
+</li>
+<li>
+<p>Modify the inject node configuration to inject a string and set the string value to <strong>${WWW}</strong> which produces the same result as using the env variable setting:</p>
+<p><img alt="env var substitutions" class="center" src="image/envVarSubst.png" style="width: 50%"/></p>
+<p>Test the outcome by deploying the change, then press the button on the inject node - the output should be the same as the previous output, showing environment variable substitution.</p>
+</li>
+</ol>
+<h3 id="step-2-run-a-local-broker">Step 2. Run a local broker<a class="headerlink" href="#step-2-run-a-local-broker" title="Permanent link">¶</a></h3>
+<ol>
+<li>
+<p>You need a clone a git repository to your local system so you can access the SSL certificates we will use for the rest of this tutorial:</p>
+<p><code>git clone https://github.com/binnes/moreNodeRedWorkshop.git</code></p>
+<p>or if using ssh keys with GitHub:</p>
+<p><code>git clone git@github.com:binnes/moreNodeRedWorkshop.git</code></p>
+</li>
+<li>
+<p>Add a docker network bridge to allow the Node-RED container to find the MQTT broker container.  A user-defined network bridge allows containers connected to the same bridge to communicate, without exporting ports and also provides automatic name resolution using the --name parameter provided at container start:</p>
+<p><code>docker network create NRbridge</code></p>
+</li>
+<li>
+<p>Start the MQTT Mosquitto container:</p>
+<p><code>docker run -itd -p 8883:8883 -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mqttBroker eclipse-mosquitto</code></p>
+<p>replace the <code>&lt;full path to where moreNodeREDWorkshop repo cloned&gt;</code> with the <strong>fully qualified path</strong> of the directory containing the git repository.</p>
+<p>e.g. On windows, if I cloned the repository into my home directory <strong>c:\Users\brian</strong> then the command would be:</p>
+<p><code>docker run -itd -p 8883:8883 -v c:\Users\brian\moreNodeRedWorkshop\en\part5\broker:/mosquitto --network NRbridge --name mqttBroker eclipse-mosquitto</code></p>
+<p>On Mac or Linux, if I cloned the repository into home directory <strong>/Users/brian</strong> then the command would be:</p>
+<p><code>docker run -itd -p 8883:8883 -v /Users/brian/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mqttBroker eclipse-mosquitto</code></p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The -p option is passed here to export port 8883.  This exposes the MQTT broker port 8883 as if it were installed directly onto your laptop or workstation.  If you only want the services of the MQTT broker to be available to other containers connected to the NRbridge network, then you can omit the -p 8883:8883 from the command line.</p>
+</div>
+</li>
+<li>
+<p>(OPTIONAL) If you want to create additional broker users in the container.  There is already a default user created, the username is <strong>mosquitto</strong> with password <strong>passw0rd</strong>:</p>
+<p><code>docker exec mqttBroker mosquitto_passwd -b /mosquitto/config/passwd username userpassword</code></p>
+<p>replacing <em>username</em> and <em>userpassword</em> as required</p>
+</li>
+<li>
+<p>If you want to watch the mosquitto logs you can with command:</p>
+<p><code>docker logs -f mqttBroker</code></p>
+<p>Press and hold the Control key, then press C (Ctrl-C) to exit following the mqtt broker logs</p>
+</li>
+</ol>
+<h3 id="step-3-mqtt-node-config">Step 3. MQTT node config<a class="headerlink" href="#step-3-mqtt-node-config" title="Permanent link">¶</a></h3>
+<p>In this section you will add some additional nodes to Node-RED, which connect to your local MQTT broker.</p>
+<ol>
+<li>
+<p>Restart the Node-RED service on your system.  To connect to the broker the Node-RED container need access to the broker certificates, so we will map the same volume as we did when starting the broker, as the certificates are in a cert sub-directory.  We also need to add the --network option to put the Node-RED container instance on the same Docker network bridge as the MQTT broker container instance.  </p>
+<p><code>docker stop mynodered</code><br/>
+<code>docker rm mynodered</code></p>
+<p>Now run the appropriate command for your operating system (replacing <em>YOUR-USERNAME</em> with your own username):
+  * <strong>Windows</strong>:</p>
+<div class="highlight"><pre><span></span><code>  `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;\moreNodeRedWorkshop\en\part5\broker:/mosquitto --network NRbridge --name mynodered nodered/node-red`
+</code></pre></div>
+<ul>
+<li>
+<p><strong>Mac OS</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red</code></p>
+</li>
+<li>
+<p><strong>Linux</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red</code></p>
+</li>
+</ul>
+<p>e.g. on mac, logged in as user brian, the command might look like:</p>
+<p><code>docker run -itd -p 1880:1880 -v /Users/brian/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true -v /Users/brian/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red</code></p>
+</li>
+<li>
+<p>Import the following flow (using the same technique used in the previous tutorial - <strong>menu</strong> -&gt; <strong>import</strong>):</p>
+<div class="highlight"><pre><span></span><code><span class="p">[{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"8381a5c3.3cbf9"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"mqtt in"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"topic"</span><span class="p">:</span><span class="s2">"#"</span><span class="p">,</span><span class="nt">"qos"</span><span class="p">:</span><span class="s2">"2"</span><span class="p">,</span><span class="nt">"datatype"</span><span class="p">:</span><span class="s2">"json"</span><span class="p">,</span><span class="nt">"broker"</span><span class="p">:</span><span class="s2">"d2a17e7.00b668"</span><span class="p">,</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">90</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">660</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[[</span><span class="s2">"ebab6856.8901c"</span><span class="p">]]},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"ebab6856.8901c"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"debug"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"active"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"tosidebar"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"console"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"tostatus"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">"complete"</span><span class="p">:</span><span class="s2">"true"</span><span class="p">,</span><span class="nt">"targetType"</span><span class="p">:</span><span class="s2">"full"</span><span class="p">,</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">410</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">660</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[]},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"92d9d4a9.e5cf4"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"inject"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"topic"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"payload"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"payloadType"</span><span class="p">:</span><span class="s2">"str"</span><span class="p">,</span><span class="nt">"repeat"</span><span class="p">:</span><span class="s2">"10"</span><span class="p">,</span><span class="nt">"crontab"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"once"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">"onceDelay"</span><span class="p">:</span><span class="mf">0.1</span><span class="p">,</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">110</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">540</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[[</span><span class="s2">"fb7b0c12.eb2e48"</span><span class="p">]]},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"fb7b0c12.eb2e48"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"change"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"rules"</span><span class="p">:[{</span><span class="nt">"t"</span><span class="p">:</span><span class="s2">"set"</span><span class="p">,</span><span class="nt">"p"</span><span class="p">:</span><span class="s2">"payload"</span><span class="p">,</span><span class="nt">"pt"</span><span class="p">:</span><span class="s2">"msg"</span><span class="p">,</span><span class="nt">"to"</span><span class="p">:</span><span class="s2">"{ \"time\" : $fromMillis($toMillis($now()),'[H]:[m]:[s]') }"</span><span class="p">,</span><span class="nt">"tot"</span><span class="p">:</span><span class="s2">"jsonata"</span><span class="p">}],</span><span class="nt">"action"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"property"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"from"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"to"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"reg"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">260</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">560</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[[</span><span class="s2">"d356084b.b81818"</span><span class="p">]]},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"d356084b.b81818"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"mqtt out"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">"3af82246.3634ae"</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"topic"</span><span class="p">:</span><span class="s2">"time"</span><span class="p">,</span><span class="nt">"qos"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"retain"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"broker"</span><span class="p">:</span><span class="s2">"d2a17e7.00b668"</span><span class="p">,</span><span class="nt">"x"</span><span class="p">:</span><span class="mi">410</span><span class="p">,</span><span class="nt">"y"</span><span class="p">:</span><span class="mi">580</span><span class="p">,</span><span class="nt">"wires"</span><span class="p">:[]},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"d2a17e7.00b668"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"mqtt-broker"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"myBrokerConfig"</span><span class="p">,</span><span class="nt">"broker"</span><span class="p">:</span><span class="s2">"mqttBroker"</span><span class="p">,</span><span class="nt">"port"</span><span class="p">:</span><span class="s2">"8883"</span><span class="p">,</span><span class="nt">"tls"</span><span class="p">:</span><span class="s2">"9ec473ef.e0678"</span><span class="p">,</span><span class="nt">"clientid"</span><span class="p">:</span><span class="s2">"nodered"</span><span class="p">,</span><span class="nt">"usetls"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"compatmode"</span><span class="p">:</span><span class="kc">false</span><span class="p">,</span><span class="nt">"keepalive"</span><span class="p">:</span><span class="s2">"60"</span><span class="p">,</span><span class="nt">"cleansession"</span><span class="p">:</span><span class="kc">true</span><span class="p">,</span><span class="nt">"birthTopic"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"birthQos"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="nt">"birthRetain"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="nt">"birthPayload"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"closeTopic"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"closeQos"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="nt">"closeRetain"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="nt">"closePayload"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"willTopic"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"willQos"</span><span class="p">:</span><span class="s2">"0"</span><span class="p">,</span><span class="nt">"willRetain"</span><span class="p">:</span><span class="s2">"false"</span><span class="p">,</span><span class="nt">"willPayload"</span><span class="p">:</span><span class="s2">""</span><span class="p">},{</span><span class="nt">"id"</span><span class="p">:</span><span class="s2">"9ec473ef.e0678"</span><span class="p">,</span><span class="nt">"type"</span><span class="p">:</span><span class="s2">"tls-config"</span><span class="p">,</span><span class="nt">"z"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"name"</span><span class="p">:</span><span class="s2">"myTLSconfig"</span><span class="p">,</span><span class="nt">"cert"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"key"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"ca"</span><span class="p">:</span><span class="s2">"/mosquitto/certs/mqtt_ca.crt"</span><span class="p">,</span><span class="nt">"certname"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"keyname"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"caname"</span><span class="p">:</span><span class="s2">""</span><span class="p">,</span><span class="nt">"servername"</span><span class="p">:</span><span class="s2">"mqttBroker"</span><span class="p">,</span><span class="nt">"verifyservercert"</span><span class="p">:</span><span class="kc">true</span><span class="p">}]</span>
+</code></pre></div>
+</li>
+<li>
+<p>Open up the configuration of either of the mqtt nodes and select the edit icon next to the MQTT server config <img alt="open server config" class="center" src="image/openMQTTconfig.png" style="width: 50%"/></p>
+</li>
+<li>Switch to the <strong>Security</strong> tab and enter the MQTT broker credentials.  The default credentials are <strong>mosquitto</strong> / <strong>passw0rd</strong> <img alt="mqtt credentials" class="center" src="image/mqttCredentials.png" style="width: 50%"/></li>
+<li>Switch to the <strong>Connection</strong> tab and open the TLS Configuration <img alt="TLS config" class="center" src="image/openTLSconfig.png" style="width: 50%"/></li>
+<li>The root certificate information should be already populated.  The certificate is read from the imported volume Docker mapped to the /mosquitto path <img alt="ca cert" class="center" src="image/TLScaCert.png" style="width: 50%"/></li>
+<li>Press the update and Done buttons to save the configuration, then Deploy the flow. You should see the MQTT nodes connected to your mqtt broker <img alt="mqtt connected" class="center" src="image/mqttConnected.png"/></li>
+</ol>
+<p>The sample application publishes the time to the configured MQTT broker every 10 seconds.  The second MQTT node subscribes to all topics (using # wildcard), so will receive all messages published by the first node.  It simply writes out the received message to the debug panel and also the system console (which makes the messages visible in the logs, which can be accessed using <code>docker logs -f mynodered</code> command)</p>
+<h3 id="step-4-removing-static-config-from-nodes">Step 4. Removing static config from nodes<a class="headerlink" href="#step-4-removing-static-config-from-nodes" title="Permanent link">¶</a></h3>
+<p>To prevent config being captured in a flow you can replace all configuration of nodes by environment variables, so at run time the environment can provide the configuration to a flow, rather than the configuration being trapped in the flow.  This works for all string based values (including passwords).</p>
+<ol>
+<li>Open up the server config and make the following changes on the Connection tab:<ul>
+<li>set the Server to ${MQTT_HOST}</li>
+<li>set the Port to ${MQTT_PORT}</li>
+<li>set the Client ID to ${MQTT_CLIENT_ID}</li>
+</ul>
+</li>
+<li>Switch to the Security tab:<ul>
+<li>set the Username to ${MQTT_USER}</li>
+<li>set the Password to ${MQTT_PWD} (you won't be able to see this, as the password field hides the content)</li>
+</ul>
+</li>
+<li>Switch back to the Connection tab and open the TLS config editor<ul>
+<li>set the CA Certificate to ${MQTT_CA_CERT}</li>
+<li>set the Server name to ${MQTT_HOST}</li>
+</ul>
+</li>
+<li>Press Update and Done to close the config panels then Deploy the flow.</li>
+</ol>
+<p>This is what the config should now look like:
+<img alt="MQTT Config" class="center" src="image/mqttBrokerConfig.png" style="width: 50%"/> <img alt="MQTT Security conifig" class="center" src="image/mqttBrokerSecurityConfig.png" style="width: 50%"/> and the resultant flow file segment :</p>
+<div class="highlight"><pre><span></span><code>  <span class="p">{</span>
+      <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"7a44476d.a179c8"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"mqtt-broker"</span><span class="p">,</span>
+      <span class="nt">"z"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"myBrokerConfig"</span><span class="p">,</span>
+      <span class="nt">"broker"</span><span class="p">:</span> <span class="s2">"${MQTT_HOST}"</span><span class="p">,</span>
+      <span class="nt">"port"</span><span class="p">:</span> <span class="s2">"${MQTT_PORT}"</span><span class="p">,</span>
+      <span class="nt">"tls"</span><span class="p">:</span> <span class="s2">"850bd469.ceb218"</span><span class="p">,</span>
+      <span class="nt">"clientid"</span><span class="p">:</span> <span class="s2">"${MQTT_CLIENT_ID}"</span><span class="p">,</span>
+      <span class="nt">"usetls"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">"compatmode"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+      <span class="nt">"keepalive"</span><span class="p">:</span> <span class="s2">"60"</span><span class="p">,</span>
+      <span class="nt">"cleansession"</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">"birthTopic"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"birthQos"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="nt">"birthRetain"</span><span class="p">:</span> <span class="s2">"false"</span><span class="p">,</span>
+      <span class="nt">"birthPayload"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"closeTopic"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"closeQos"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="nt">"closeRetain"</span><span class="p">:</span> <span class="s2">"false"</span><span class="p">,</span>
+      <span class="nt">"closePayload"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"willTopic"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"willQos"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="nt">"willRetain"</span><span class="p">:</span> <span class="s2">"false"</span><span class="p">,</span>
+      <span class="nt">"willPayload"</span><span class="p">:</span> <span class="s2">""</span>
+  <span class="p">}</span><span class="err">,</span>
+  <span class="p">{</span>
+      <span class="nt">"id"</span><span class="p">:</span> <span class="s2">"850bd469.ceb218"</span><span class="p">,</span>
+      <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"tls-config"</span><span class="p">,</span>
+      <span class="nt">"z"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"name"</span><span class="p">:</span> <span class="s2">"myTLSconfig"</span><span class="p">,</span>
+      <span class="nt">"cert"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"key"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"ca"</span><span class="p">:</span> <span class="s2">"${MQTT_CA_CERT}"</span><span class="p">,</span>
+      <span class="nt">"certname"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"keyname"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"caname"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+      <span class="nt">"servername"</span><span class="p">:</span> <span class="s2">"${MQTT_HOST}"</span><span class="p">,</span>
+      <span class="nt">"verifyservercert"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span><span class="err">,</span>
+</code></pre></div>
+<p>and flow credentials file:</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">"7a44476d.a179c8"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"user"</span><span class="p">:</span> <span class="s2">"${MQTT_USER}"</span><span class="p">,</span>
+        <span class="nt">"password"</span><span class="p">:</span> <span class="s2">"${MQTT_PWD}"</span>
+    <span class="p">},</span>
+    <span class="nt">"850bd469.ceb218"</span><span class="p">:</span> <span class="p">{}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>You can see the environment variables, which will be substituted at runtime for the values contained in the environment variables.</p>
+<h3 id="step-5-testing-the-environment-variable-substitution">Step 5. Testing the environment variable substitution<a class="headerlink" href="#step-5-testing-the-environment-variable-substitution" title="Permanent link">¶</a></h3>
+<p>If you were running locally you would need to set the environment variables before Node-RED is started, so they are available when Node-RED loads and runs the flow.  However, as we are running from a container we need to provide the environment variables as the container is started.</p>
+<p>As there are quite a few environment variables that need to be set, so we will switch to reading the environment variables from a file.</p>
+<ol>
+<li>In a command or terminal window, ensure the current working directory is your Node-RED project directory (<code>cd [user home directory]/NRdata/projects/Node-RED-Docker</code>)</li>
+<li>Create a new file called env.list in your project directory</li>
+<li>
+<p>Add the following to the env.list file:</p>
+<div class="highlight"><pre><span></span><code>NODE_RED_ENABLE_PROJECTS=true
+MQTT_CLIENT_ID=nodeRED
+MQTT_HOST=mqttBroker
+MQTT_PORT=8883
+MQTT_USER=mosquitto
+MQTT_PWD=passw0rd
+MQTT_CA_CERT=/mosquitto/certs/mqtt_ca.crt
+WWW=123
+</code></pre></div>
+</li>
+<li>
+<p>Restart Node-RED:  </p>
+<ul>
+<li><code>docker stop mynodered</code></li>
+<li><code>docker rm mynodered</code></li>
+<li>Run the appropriate command for your operating system (replacing <em>YOUR-USERNAME</em> with your own username):</li>
+<li>
+<p><strong>Windows</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 --env-file env.list -v c:\Users\YOUR-USERNAME\NRdata:/data -v c:\&lt;full path to where moreNodeREDWorkshop repo cloned&gt;\moreNodeRedWorkshop\en\part5\broker:/mosquitto --network NRbridge --name mynodered nodered/node-red</code>
+      * <strong>Mac OS</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 --env-file env.list -v /Users/YOUR-USERNAME/NRdata:/data -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red</code>
+      * <strong>Linux</strong>:</p>
+<p><code>docker run -itd -p 1880:1880 --env-file env.list -v /home/YOUR-USERNAME/NRdata:/data -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red</code></p>
+</li>
+</ul>
+<p>e.g. on mac, logged in as user brian, the command might look like:</p>
+<p><code>docker run -itd -p 1880:1880 --env-file env.list -v /Users/brian/NRdata:/data -v /Users/brian/moreNodeRedWorkshop/en/part5/broker:/mosquitto --network NRbridge --name mynodered nodered/node-red</code></p>
+</li>
+</ol>
+<h3 id="step-6-updating-docker-container-in-dockerhub">Step 6. Updating Docker container in dockerhub<a class="headerlink" href="#step-6-updating-docker-container-in-dockerhub" title="Permanent link">¶</a></h3>
+<p>To create a containerised version of the latest version of the Node-RED application you need to rebuild and push the updated Node-RED application.</p>
+<ol>
+<li>Go to the GitHub integration tab in the Node-RED editor and commit and push the latest version of your flow</li>
+<li>
+<p>Ensuring you are in the project directory in a command or terminal window, build the container with the command (replace YOUR-DOCKER-USERNAME with your docker username):</p>
+<p><code>docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t YOUR-DOCKER-USERNAME/node-red-docker-sample --push .</code></p>
+</li>
+<li>
+<p>Stop the existing Node-RED docker instance and remove it.  You cannot have 2 instances of a Docker container with the same name, so if the previous instance of the dockerNR container still exists, then you need to remove it before you can deploy a new instance:  </p>
+<ul>
+<li><code>docker stop mynodered</code></li>
+<li><code>docker rm mynodered</code></li>
+<li><code>docker rm dockerNR</code></li>
+</ul>
+</li>
+<li>
+<p>Pull the container image from dockerhub to ensure you have the latest version locally (replace YOUR-DOCKER-USERNAME with your docker username):</p>
+<p><code>docker pull YOUR-DOCKER-USERNAME/node-red-docker-sample:latest</code></p>
+</li>
+<li>
+<p>Run the new container.  For docker you can use the <strong>--env-file</strong> option to pass in environment variables using the env.list file created for the previous step.  This time we will use a fully qualified path to the file, so you don't need to be in the directory containing the env.list file.  Start your containerised Node-RED application.  You also need the container on the NRbridge network bridge to be able to access the MQTT broker container (replace the path to the moreNodeRedWorkshop directory and YOUR-DOCKER-USERNAME with your docker username):</p>
+<ul>
+<li>
+<p><strong>Windows</strong>:</p>
+<p><code>docker run -dit --env-file c:\Users\YOUR-USERNAME\NRdata\projects\Node-RED-Docker\env.list -v c:\&lt;full path to where moreNodeREDWorkshop repo cloned&gt;\moreNodeRedWorkshop\en\part5\broker:/mosquitto -p 1880:1880 --network NRbridge --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest</code></p>
+</li>
+<li>
+<p><strong>Mac OS</strong>:</p>
+<p><code>docker run -dit --env-file /Users/YOUR-USERNAME/NRdata/projects/Node-RED-Docker/env.list -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;/moreNodeRedWorkshop/en/part5/broker:/mosquitto -p 1880:1880 --network NRbridge --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest</code></p>
+</li>
+<li>
+<p><strong>Linux</strong>:</p>
+<p><code>docker run -dit --env-file /home/YOUR-USERNAME/NRdata/projects/Node-RED-Docker/env.list -v &lt;full path to where moreNodeREDWorkshop repo cloned&gt;/moreNodeRedWorkshop/en/part5/broker:/mosquitto -p 1880:1880 --network NRbridge --name dockerNR YOUR-DOCKER-USERNAME/node-red-docker-sample:latest</code></p>
+</li>
+</ul>
+<p>Notice:</p>
+<ul>
+<li>you need to provide the values for content in brackets in the above command : <strong>&lt; &gt;</strong></li>
+<li>all the environment variables are set with the <strong>--env-file</strong> option and the env.list file</li>
+<li>the directory containing the certificates is mapped to a local directory <strong>/mosquitto</strong> within the container using the <strong>-v</strong> option.  The <strong>MQTT_CA_CERT</strong> environment variable references the root certificate authority certificate from within this directory.</li>
+<li>The containers are able to communicate and find each other as they are using the user-defined bridge <strong>NRbridge</strong> using the <strong>--network</strong> option and the <strong>--name</strong> option to name the container instance and enable the container name resolution.  The <strong>MQTT_HOST</strong> environment variable is set to <strong>mqttBroker</strong>, so requires the MQTT container to be named <strong>mqttBroker</strong>.</li>
+</ul>
+</li>
+</ol>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">¶</a></h2>
+<p>In this tutorial you:</p>
+<ul>
+<li>learned how to access environment variables in Node-RED</li>
+<li>replaced node config setting with environment variables</li>
+<li>set environment variables when creating a Docker container</li>
+<li>how to get docker containers to communicate using a Docker user-defined bridge</li>
+</ul>
+<p>In this tutorial we used the Docker command line to run containers, but there are higher level services, which make managing containers and their configuration more robust and scaleable, such as Kubernetes.</p>
+</article>
+</div>
+</div>
+</main>
+<footer class="md-footer">
+<div class="md-footer-nav">
+<nav aria-label="Footer" class="md-footer-nav__inner md-grid">
+<a class="md-footer-nav__link md-footer-nav__link--prev" href="../Packaging-Node-RED-apps-in-containers/index.html" rel="prev" title="Packaging Applications">
+<div class="md-footer-nav__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"></path></svg>
+</div>
+<div class="md-footer-nav__title">
+<div class="md-ellipsis">
+<span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Packaging Applications
+              </div>
+</div>
+</a>
+</nav>
+</div>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+          Material for MkDocs
+        </a>
+ ... <a download href="../pdf/lowCodeDev.pdf" title="PDF">download PDF</a></div>
+</div>
+</div>
+</footer>
+</div>
+<script src="../assets/javascripts/vendor.92ffa368.min.js"></script>
+<script src="../assets/javascripts/bundle.5123e3d4.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents"}</script>
+<script>
+        app = initialize({
+          base: "..",
+          features: [],
+          search: Object.assign({
+            worker: "../assets/javascripts/worker/search.a68abb33.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+</body>
+</html>
