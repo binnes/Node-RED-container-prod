@@ -6,12 +6,12 @@ In this tutorial you will learn how to enable git integration in Node-RED.  Once
 
 In this tutorial, you will learn how to:
 
-* Enable Node-RED to work with git source control
-* Use the git integration features of the Node-RED editor to
-  * clone a git repository
-  * commit and push changes to a git server
-  * pull changes from a git server
-  * resolve merge conflicts within the Node-RED editor
+- Enable Node-RED to work with git source control
+- Use the git integration features of the Node-RED editor to
+  - clone a git repository
+  - commit and push changes to a git server
+  - pull changes from a git server
+  - resolve merge conflicts within the Node-RED editor
 
 The video below shows the instructor completing the tutorial, so you can watch and follow along, or skip the video and jump to the prerequisites section.
 
@@ -21,13 +21,13 @@ The video below shows the instructor completing the tutorial, so you can watch a
 
 To complete this tutorial, you need:
 
-* some experience of using Node-RED
-* a laptop/workstation running an up to date version of Linux, Mac OS or Windows
-* an up to date version of [Docker](https://www.docker.com) on your laptop/workstation (version 19.03 or higher should be returned by the `docker version` command)
-  * Windows users need to ensure that Docker is using Linux containers.  This setting is available by right clicking the Docker icon in the status section of the Windows task bar, usually at the bottom of the screen.  You should see an option to switch to Windows containers.  If you have an option to switch to Linux containers, you need to select it as you are currently using windows based containers.  
+- some experience of using Node-RED
+- a laptop/workstation running an up to date version of Linux, Mac OS or Windows
+- an up to date version of [Docker](https://www.docker.com) on your laptop/workstation (version 19.03 or higher should be returned by the `docker version` command)
+  - Windows users need to ensure that Docker is using Linux containers.  This setting is available by right clicking the Docker icon in the status section of the Windows task bar, usually at the bottom of the screen.  You should see an option to switch to Windows containers.  If you have an option to switch to Linux containers, you need to select it as you are currently using windows based containers.  
   ![Switch to Linux containers](image/linuxContainers.png){style="width: 25%" .center}
-* a [github](https://github.com) account
-* [git tools](https://git-scm.com/downloads) installed on your laptop/workstation
+- a [github](https://github.com) account
+- [git tools](https://git-scm.com/downloads) installed on your laptop/workstation
 
 You will notice that a Node-RED installation is not a prerequisite.  In this tutorial all development is done using a Node-RED container.  Using a container ensures that all developers working on a project use a common Node-RED installation, with an '*approved*' set of Node.js packages installed in the container and nodes in the Node-RED pallet.
 
@@ -52,9 +52,9 @@ First we need to decide what is a Node-RED application code base?
 
 A Node-RED application is defined by a flow file and an optional credentials file.  However, the flow may require some additional nodes to be installed.  The flow runs within a Node.js application, which is the Node-RED runtime.  This runtime can be customised and configured, so to fully capture a Node-RED application code base you need to capture the :
 
-* application flow and credential file
-* the package.json file, which captures all required Node.js and Node-RED nodes needed by the flow
-* the Node-RED runtime source files
+- application flow and credential file
+- the package.json file, which captures all required Node.js and Node-RED nodes needed by the flow
+- the Node-RED runtime source files
 
 For this workshop a [starter git project](https://github.com/binnes/Node-RED-Docker) has been provided, containing a Node-RED runtime, customised to be managed by a cloud.
 
@@ -66,15 +66,19 @@ Follow the instructions to fork the starter git repository, which is contains a 
 
 2. Make sure you are logged into your github account then press the **Fork** button so you have your own copy of the repo ![Fork](image/forkRepo.png)
 
-3. (OPTIONAL) If you have 2-factor authentication enabled on your github account, then you need to use a Personal Access Token when using the git command line tools.
+#### Creating a GitHub Personal Access Token
 
-    To create a Personal Access Token:
-    * Open the git settings  
-            ![settings](image/gitSettings.png){style="width: 20%" .center}
-    * select **Developer settings** then **Personal access tokens** then **Generate new token**.
-    * Give the token a use, select all scopes except `admin:enterprise` and `admin:gpg.key` scope then **Generate token**
-            ![generate token](image/gitPAT.png)
-    * record the token as you will need it later in the tutorial.
+If you have 2-factor authentication enabled on your github account, then you need to use a Personal Access Token when using the git command line tools.
+
+!!! note
+    If you don't have 2-factor authentication enabled on your github account then skip this section.
+
+Open the git settings  
+        ![settings](image/gitSettings.png){style="width: 20%" .center}
+select **Developer settings** then **Personal access tokens** then **Generate new token**.
+Give the token a use, select all scopes except `admin:enterprise` and `admin:gpg.key` scope then **Generate token**
+        ![generate token](image/gitPAT.png){style="width: 80%" .center}
+record the token as you will need it later in the tutorial.
 
 ### Step 2. Enable Source control in Node-RED
 
@@ -82,15 +86,15 @@ Node-RED has the [**projects**](https://nodered.org/docs/user-guide/projects/) f
 
 There are 2 ways of enabling projects in Node-RED:
 
-* Update the settings.js file in the userDirectory for Node-RED (this is the .node-red folder in your home folder by default)
-* Set the **NODE_RED_ENABLE_PROJECTS** environment variable before starting Node-RED
+- Update the settings.js file in the userDirectory for Node-RED (this is the .node-red folder in your home folder by default)
+- Set the **NODE_RED_ENABLE_PROJECTS** environment variable before starting Node-RED
 
 !!! info
       In this tutorial we will run Node-RED in a Docker image, this removes the need for a local install of Node.js and node-RED, but if you have Node-RED already installed and want to enable the projects feature, then you should edit the settings.js file:
 
       On your system edit file .node-red/settings.js in your home directory.  At the bottom of the file change the projects setting to `enabled : true`
   
-      ![Enable Node-RED projects](image/enableProjectFeature.png){style="width: 75%" .center}
+      ![Enable Node-RED projects](image/enableProjectFeature.png){style="width: 50%" .center}
 
 Follow the instructions below to start Node-RED with the project feature enabled.  The commands need to be entered in a command or terminal window, running as your normal login user:
 
@@ -105,22 +109,22 @@ Follow the instructions below to start Node-RED with the project feature enabled
           `chmod 777 NRdata`
   
 3. To start Node-RED use command (select your operating system.  You will need to update the path to the NRdata directory):
-    * **Windows**:
+    - **Windows**:
 
         `docker run -itd -p 1880:1880 -v c:\Users\YOUR-USERNAME\NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 
-    * **Mac OS**:  
+    - **Mac OS**:  
 
         `docker run -itd -p 1880:1880 -v /Users/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 
-    * **Linux**:  
+    - **Linux**:  
 
         `docker run -itd -p 1880:1880 -v /home/YOUR-USERNAME/NRdata:/data -e NODE_RED_ENABLE_PROJECTS=true --name mynodered nodered/node-red`
 
     !!! info
-        * the **-e** option is short for **--env** and sets the **NODE_RED_ENABLE_PROJECTS** environment variable
-        * the **-v** option is short for **--volume** and maps your local **NRdata** directory into the container at location **/data**, which is configured as the userDirectory for Node-RED.
-        * to see all the possible options for the Docker run command use ```docker run --help```
+        - the **-e** option is short for **--env** and sets the **NODE_RED_ENABLE_PROJECTS** environment variable
+        - the **-v** option is short for **--volume** and maps your local **NRdata** directory into the container at location **/data**, which is configured as the userDirectory for Node-RED.
+        - to see all the possible options for the Docker run command use ```docker run --help```
 
 ### Step 3. Using Source control in Node-RED
 
@@ -128,16 +132,16 @@ The git integration built into the projects feature of Node-RED will allow you t
 
 For this tutorial the Node-RED user directory is the NRdata directory you created in the previous step, so you will find project directories in **NRdata/projects**.
 
-1. Open a browser to access your local Node-RED runtime on [http://localhost:1880](http://localhost:1880) and you should see the Projects wizard, as projects are enabled and no projects exist yet:  
+1. Open a browser to access your local Node-RED runtime on [http://localhost:1880](http://localhost:1880) and you should see the Projects wizard, as projects are enabled and no projects exist yet:
   ![project wizard](image/projectWizard.png){style="width: 50%" .center}
 
 2. Select the Clone Repository.
-    * Enter your name and email, to be used when committing content.
-    * copy the Git repo URL from **your** git repo github page (the URL should contain your github user name):  
+    - Enter your name and email, to be used when committing content.
+    - copy the Git repo URL from **your** git repo github page (the URL should contain your github user name):  
       ![github page](image/copyGitURL.png){style="width: 50%" .center}
-    * Back in the Node-RED editor window, paste the github URL into the **Git repository URL** field.
-    * Enter your git credentials for the Username and Password fields (use the Personal Access Token as the password if you have one set on your github account - your github account password will not work if a personal access token is defined) then press the **Clone project** button when all the details have been completed - leave the Credentials encryption key field blank  
-      ![Clone repo](image/cloneRepo.png){style="width: 50%" .center} 
+    - Back in the Node-RED editor window, paste the github URL into the **Git repository URL** field.
+    - Enter your git credentials for the Username and Password fields (use the Personal Access Token as the password if you have one set on your github account - your github account password will not work if a personal access token is defined) then press the **Clone project** button when all the details have been completed - leave the Credentials encryption key field blank  
+      ![Clone repo](image/cloneRepo.png){style="width: 50%" .center}
 
         !!! info
               Leaving the **credentials encryption key** field blank means that any credentials entered in any node configuration will be checked into git unencrypted.  For this tutorial this isn't an issue as we want to go look at the credentials.  For your own projects you may want to enter an encryption key, unless you plan to provide all credentials at run time and want to inspect the credentials file to verify there are no captured credentials.
@@ -171,13 +175,13 @@ Follow the instructions below to cause a merge conflict then resolve it.
 1. In the [GitHub web UI](https://github.com) open your forked project then open the flows.json page
 
 2. Select the pencil icon to start editing the file  
-    ![Edit flow](image/editFlowGitHub.png)
+    ![Edit flow](image/editFlowGitHub.png){style="width: 90%" .center}
 
 3. Find the x and y coordinates of the inject node and modify them, add or remove 10 to each of the values for x and y  
-    ![Update node location](image/updateNodeLocation.png)
+    ![Update node location](image/updateNodeLocation.png){style="width: 90%" .center}
 
 4. Press the **Commit changes** to save the change and commit the change to the master branch of the GitHub repo.  
-    ![Commit location change](image/commitLocationChange.png)
+    ![Commit location change](image/commitLocationChange.png){style="width: 90%" .center}
 
 5. Back in the Node-RED editor move the inject node to a new location, then press the **Deploy** button to make the change live.
 
@@ -196,7 +200,7 @@ Follow the instructions below to cause a merge conflict then resolve it.
     ![unmerged changes](image/unmergedChanges.png){style="width: 35%" .center}
 
 11. Expand the twisties until you can see the conflicting positions for the inject node.  You will also notice a radio button allowing you to select which version of the conflicting changes you want to accept.  
-    ![resolve merge conflicts](image/resolveConflict.png)
+    ![resolve merge conflicts](image/resolveConflict.png){style="width: 90%" .center}
 
 12. Select one of the versions by clicking the radio button.  The version which will be saved is highlighted in green and the version that will be overwritten is highlighted in red.  When all conflicts have been resolved click the **Save conflict resolution** button.
 
@@ -207,10 +211,10 @@ Follow the instructions below to cause a merge conflict then resolve it.
 
 Here are a few useful Docker commands:
 
-* `docker ps -a` : list all containers (running and stopped)
-* `docker stop mynodered` : will stop the container instance named **mynodered**, but leave the container resources intact
-* `docker start mynodered` : will start a stopped container instance named **mynodered**
-* `docker rm mynodered` : will remove all resources for container instance named **mynodered**.  The container instance must be stopped before it can be removed
+- `docker ps -a` : list all containers (running and stopped)
+- `docker stop mynodered` : will stop the container instance named **mynodered**, but leave the container resources intact
+- `docker start mynodered` : will start a stopped container instance named **mynodered**
+- `docker rm mynodered` : will remove all resources for container instance named **mynodered**.  The container instance must be stopped before it can be removed
 
 You can remove the **mynodered** container instance without loosing any data, as the docker run command mapped the **NRdata** directory into the container, so all Node-RED data has been persisted in that directory, outside the container.  
 
@@ -218,10 +222,10 @@ You can remove the **mynodered** container instance without loosing any data, as
 
 In this tutorial you:
 
-* Enabled the projects feature in the Node-RED editor to provide integration with Git version control systems
-* Cloned a GitHub project from within the Node-RED editor
-* Committed and pushed changes to GitHub
-* pulled changes from GitHub and resolved a merge conflict within the Node-RED editor
+- Enabled the projects feature in the Node-RED editor to provide integration with Git version control systems
+- Cloned a GitHub project from within the Node-RED editor
+- Committed and pushed changes to GitHub
+- pulled changes from GitHub and resolved a merge conflict within the Node-RED editor
 
 You can now work with Node-RED in a team environment synchronising via a Git repository, ensuring all changes to your Node-RED applications are version controlled.
 

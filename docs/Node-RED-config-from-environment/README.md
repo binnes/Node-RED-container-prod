@@ -106,11 +106,11 @@ the **VAR1** environment variable would be set to *abc* and **WWW** would be set
 
     Deploy the change then test the outcome by pressing the button on the Inject node to send a message.  Switch to the debug tab to see the outcome
 
-    ![Test environment variables](image/testEnvVar.png)
+    ![Test environment variables](image/testEnvVar.png){style="width: 90%" .center}
 
 3. Modify the inject node configuration to inject a string and set the string value to **${WWW}** which produces the same result as using the env variable setting:
 
-    ![env var substitutions](image/envVarSubst.png){style="width: 50%" .center}
+    ![env var substitutions](image/envVarSubst.png){style="width: 40%" .center}
 
     Test the outcome by deploying the change, then press the button on the inject node - the output should be the same as the previous output, showing environment variable substitution.
 
@@ -193,7 +193,7 @@ In this section you will add some additional nodes to Node-RED, which connect to
 4. Switch to the **Security** tab and enter the MQTT broker credentials.  The default credentials are **mosquitto** / **passw0rd** ![mqtt credentials](image/mqttCredentials.png){style="width: 50%" .center}
 5. Switch to the **Connection** tab and open the TLS Configuration ![TLS config](image/openTLSconfig.png){style="width: 50%" .center}
 6. The root certificate information should be already populated.  The certificate is read from the imported volume Docker mapped to the /mosquitto path ![ca cert](image/TLScaCert.png){style="width: 50%" .center}
-7. Press the update and Done buttons to save the configuration, then Deploy the flow. You should see the MQTT nodes connected to your mqtt broker ![mqtt connected](image/mqttConnected.png){.center}
+7. Press the update and Done buttons to save the configuration, then Deploy the flow. You should see the MQTT nodes connected to your mqtt broker ![mqtt connected](image/mqttConnected.png){style="width: 50%" .center}
 
 The sample application publishes the time to the configured MQTT broker every 10 seconds.  The second MQTT node subscribes to all topics (using # wildcard), so will receive all messages published by the first node.  It simply writes out the received message to the debug panel and also the system console (which makes the messages visible in the logs, which can be accessed using `docker logs -f mynodered` command)
 

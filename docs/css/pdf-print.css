@@ -17,4 +17,11 @@ pre code {
     p {
         font-size: inherit;
     }
+    ol,
+    ul,
+    li {
+        break-inside: avoid;
+        break-before: avoid;
+        break-after: avoid;
+    }
 }

@@ -74,9 +74,9 @@ Before building the app we will add another few nodes to add a Web endpoint, so 
 2. Import the following JSON to add the **/hello** endpoint:
 
     * to import the flow select the main menu (☰), then the import option from the menu
-        ![main menu](image/mainMenu.png){style="width: 35%" .center}
+        ![main menu](image/mainMenu.png){style="width: 25%" .center}
     * copy and paste the JSON below into the Import nodes window, then press the **Import** button to import the nodes
-        ![import nodes](image/importNodes.png)
+        ![import nodes](image/importNodes.png){style="width: 90%" .center}
 
       ```JSON
       [{"id":"55dd0376.f7c64c","type":"http in","z":"3af82246.3634ae","name":"","url":"/hello","method":"get","upload":false,"swaggerDoc":"","x":130,"y":420,"wires":[["c656aba7.944288"]]},{"id":"c2380ca8.0463","type":"http response","z":"3af82246.3634ae","name":"","statusCode":"","headers":{},"x":470,"y":420,"wires":[]},{"id":"c656aba7.944288","type":"change","z":"3af82246.3634ae","name":"","rules":[{"t":"set","p":"payload","pt":"msg","to":"{\"text\":\"Hello\"}","tot":"json"}],"action":"","property":"","from":"","to":"","reg":false,"x":300,"y":420,"wires":[["c2380ca8.0463"]]}]

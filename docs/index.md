@@ -8,7 +8,7 @@ One of the reported difficulties with using Node-RED in production is how to int
 
 To use Node-RED in a DevOps pipeline, the development process needs to looks like other programming languages:
 
-![Node-RED production pipeline](image/NRprod.png)
+![Node-RED production pipeline](image/NRprod.png){style="width: 80%" .center}
 
 1. Developer works locally to create applications
 2. Code is delivered to a version control system, such as Git
